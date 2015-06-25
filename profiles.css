@@ -1,0 +1,32 @@
+/*HEADER*/
+
+.jumbotron {
+    text-align:center;
+    width:100%;
+}
+
+
+/*----------------------------------
+
+
+/*PROFILE*/
+
+body {
+    margin:auto;
+    text-align:center;
+    font-size:1.2em;
+}
+
+img {
+    width:30%;
+    height:auto;
+    padding:0px;
+}
+
+
+.square {
+    margin:auto;
+    width:30%;
+    border:solid;
+    border-width:25px;
+}
