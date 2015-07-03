@@ -32,11 +32,13 @@ loginPage="../index.html"
 
 #page to load to logout:
 logoutPage="logout.py"
+
+#query string dictionary using CGI
+fsd=cgiDeal.FStoD()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #validate form input
 def valid():
-    fsd=cgiDeal.FStoD()
     if not ('uname' in fsd):
         return False
     if not ('usecret' in fsd):
@@ -50,7 +52,6 @@ def valid():
 
 #return True if user valid, False otherwise
 def authSession():
-    fsd=cgiDeal.FStoD()
     if not( valid() ):
         return False
     try:
@@ -68,7 +69,6 @@ def authSession():
 
 #if user logged in, return session string, otherwise empty string
 def sessionStr():
-    fsd=cgiDeal.FStoD()
     if not(valid()):
         return ''
     u=fsd['uname']
@@ -120,12 +120,11 @@ def genTagForm(username):
 
 # ========= CONTENT-TYPE LINE REQUIRED. ===========
 # ======= Must be beginning of HTML string ========
-fsd = cgiDeal.FStoD()
 
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
 htmlStr += "<html><head><title> " + fsd['uname'] + "'s Dashboard </title>"
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../dashboard.css">
+        <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

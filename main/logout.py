@@ -2,10 +2,17 @@
 # ========= HASHBANG LINE ABOVE IS MAGIC! =========
 # ========= (Must be first line of file.) =========
 
+# =================== IMPORTS ========================
 import os
 import cgi
 import cgitb
 #cgitb.enable()  #diag info --- comment out once full functionality achieved
+
+#import cgiDeal from another folder
+import sys
+
+sys.path.insert(0, '../cgiToDict/')
+import cgiDeal
 
  #####################################################
  ## Back-End Script for USER ACCOUNT AUTHENTICATION
@@ -30,23 +37,10 @@ currentUsersFile="../site_data/usersOnline.csv"
 
 #login page:
 loginPage="../index.html"
+
+#query string dictionary using CGI
+fsd=cgiDeal.FStoD()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-# ~~~~~~~~~~~~~~~ support functions ~~~~~~~~~~~~~~~
-def FStoD():
-    '''
-    Converts cgi.FieldStorage() return value into a standard dictionary
-    '''
-    d = {}
-    formData = cgi.FieldStorage()
-    for k in formData.keys():
-        d[k] = formData[k].value
-    return d
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-#store querystring var/val pairs in dictionary
-fsd=FStoD()
 
 
 #validate user input
@@ -107,7 +101,7 @@ def remFrLoggedIn(u):
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
 htmlStr += "<html><head><title> Login Results </title>"
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../interiorpage.css">
+        <link rel="stylesheet" type="text/css" href="../css/interiorpage.css">
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

@@ -9,19 +9,11 @@ import cgi
 import cgitb
 #cgitb.enable()  #diag info --- comment out once full functionality achieved
 
+#import cgiDeal from another folder
+import sys
 
-# ~~~~~~~~~~~~~~~ support functions ~~~~~~~~~~~~~~~
-def FStoD():
-    '''
-    Converts cgi.FieldStorage() return value into a standard dictionary
-    '''
-    d = {}
-    formData = cgi.FieldStorage()
-    for k in formData.keys():
-        d[k] = formData[k].value
-    return d
-# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+sys.path.insert(0, '../cgiToDict/')
+import cgiDeal
 
 # ~~~~~~~~~~~~~~~ auxiliary files ~~~~~~~~~~~~~~~~~
 #file to store users and their passwords:
@@ -32,12 +24,10 @@ currentUsersFile="../site_data/usersOnline.csv"
 
 #login page:
 loginPage="../index.html"
+
+#query string dictionary using CGI
+fsd=cgiDeal.FStoD()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-
-#store querystring var/val pairs in dictionary
-fsd=FStoD()
-
 
 #validate user input
 def valid():
@@ -113,7 +103,7 @@ def createUser(u,p):
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
 htmlStr += "<html><head><title> User Account Creation Results </title>"
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../interiorpage.css">
+        <link rel="stylesheet" type="text/css" href="../css/interiorpage.css">
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">

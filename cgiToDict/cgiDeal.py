@@ -27,4 +27,3 @@ def FStoD():
     for k in formData.keys():
         d[k] = formData[k].value
     return d
-

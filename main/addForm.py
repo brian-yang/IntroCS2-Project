@@ -35,11 +35,13 @@ loginPage="../index.html"
 
 #page to load to logout:
 logoutPage="logout.py"
+
+#query string dictionary using CGI
+fsd=cgiDeal.FStoD()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 #validate form input
 def valid():
-    fsd=cgiDeal.FStoD()
     if not ('uname' in fsd):
         return False
     if not ('usecret' in fsd):
@@ -53,7 +55,6 @@ def valid():
 
 #return True if user valid, False otherwise
 def authSession():
-    fsd=cgiDeal.FStoD()
     if not( valid() ):
         return False
     try:
@@ -71,7 +72,6 @@ def authSession():
 
 #if user logged in, return session string, otherwise empty string
 def sessionStr():
-    fsd=cgiDeal.FStoD()
     if not(valid()):
         return ''
     u=fsd['uname']
@@ -213,7 +213,7 @@ htmlStr += "<html><head><title> DashMake </title>"
 
 # GETS THE CSS FILES FOR STYLING
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../interiorpage.css">
+        <link rel="stylesheet" type="text/css" href="../css/interiorpage.css">
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -226,7 +226,6 @@ htmlStr += "<body>"
 
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
-fsd = cgiDeal.FStoD()
 
 if not valid():
     htmlStr += "session string problem?"
