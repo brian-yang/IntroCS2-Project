@@ -88,7 +88,7 @@ def sessionLinkify(dst,visText):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 def getUsers(username):
 
-    file = open('userProfiles.csv', 'r')
+    file = open('../site_data/userProfiles.csv', 'r')
     lines = file.readlines()
     file.close()
 
@@ -120,7 +120,7 @@ def getPic(username):
 
     image = ""
 
-    file = open('userProfiles.csv', 'r')
+    file = open('../site_data/userProfiles.csv', 'r')
     lines = file.readlines()
     file.close()
 
@@ -141,7 +141,7 @@ def getPic(username):
 
 def writePic(img):
     try:
-        file = open('userProfiles.csv', 'r')
+        file = open('../site_data/userProfiles.csv', 'r')
         lines = file.readlines()
         file.close()
 
@@ -161,7 +161,7 @@ def writePic(img):
             elif not passed:
                 pre += i
 
-        file = open('userProfiles.csv', 'w')
+        file = open('../site_data/userProfiles.csv', 'w')
         file.write(pre + entry + post)
         file.close()
     except:
@@ -172,7 +172,7 @@ def writePic(img):
 def getTags(username):
     L = []
 
-    file = open('userTags.csv', 'r')
+    file = open('../site_data/userTags.csv', 'r')
     lines = file.readlines()
     file.close()
 
@@ -193,7 +193,7 @@ def getTags(username):
 
 def getDescription(username):
 
-    file = open('userProfiles.csv', 'r')
+    file = open('../site_data/userProfiles.csv', 'r')
     lines = file.readlines()
     file.close()
 
@@ -211,7 +211,7 @@ def getDescription(username):
 
 def writeDescription(description):
     try:
-        file = open('userProfiles.csv', 'r')
+        file = open('../site_data/userProfiles.csv', 'r')
         read = file.readlines()
         file.close()
 
@@ -232,7 +232,7 @@ def writeDescription(description):
             elif not passed:
                 pre += i
 
-        file = open('userProfiles.csv', 'w')
+        file = open('../site_data/userProfiles.csv', 'w')
         file.write(pre + entry + post)
         file.close()
     except:

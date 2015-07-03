@@ -94,7 +94,7 @@ def sessionLinkify(dst,visText):
 # =================== DATA ANALYSIS =====================
 #returns the most used tag
 def mostUsedTag():
-    tags = open('userTags.csv','r')
+    tags = open('../site_data/userTags.csv','r')
     rtags = tags.readlines()
     tags.close()
 
@@ -156,7 +156,7 @@ def commaDeal(item):
 #get given tag's corresponding image
 def getImgs(tag):
 
-    file = open('userTags.csv', 'r')
+    file = open('../site_data/userTags.csv', 'r')
     lines = file.readlines()
     file.close()
 
@@ -174,7 +174,7 @@ def getImgs(tag):
 
     # --------------------------------------
 
-    file = open('userImgs.csv', 'r')
+    file = open('../site_data/userImgs.csv', 'r')
     lines = file.readlines()
     file.close()
 
@@ -194,7 +194,7 @@ def getImgs(tag):
 #get given tag's corresponding caption
 def getCaps(tag):
 
-    file = open('userTags.csv', 'r')
+    file = open('../site_data/userTags.csv', 'r')
     lines = file.readlines()
     file.close()
 
@@ -212,7 +212,7 @@ def getCaps(tag):
 
     # --------------------------------------
 
-    file = open('userCaps.csv', 'r')
+    file = open('../site_data/userCaps.csv', 'r')
     lines = file.readlines()
     file.close()
 
@@ -230,7 +230,7 @@ def getCaps(tag):
 
 #returns the maximum number of tags
 def maxTags():
-    file = open('userTags.csv', 'r')
+    file = open('../site_data/userTags.csv', 'r')
     lines = file.readlines()
     file.close()
 

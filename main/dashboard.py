@@ -98,7 +98,7 @@ def checkGen(name,value,text):
 #generates a series of <option>s for the tag form
 #includes all the different tags a user has, with no repeats
 def genTagForm(username):
-    file = open('userTags.csv','r')
+    file = open('../site_data/userTags.csv','r')
     read = file.readlines()
     file.close()
 

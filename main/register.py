@@ -79,19 +79,19 @@ def createUser(u,p):
     f.write(u + "," + hashlib.md5(p).hexdigest() + "\n")
     f.close()
 
-    caps = open('userCaps.csv', 'a')
+    caps = open('../site_data/userCaps.csv', 'a')
     caps.write(u + "\n")
     caps.close()
 
-    imgs = open('userImgs.csv', 'a')
+    imgs = open('../site_data/userImgs.csv', 'a')
     imgs.write(u + "\n")
     imgs.close()
 
-    tags = open('userTags.csv', 'a')
+    tags = open('../site_data/userTags.csv', 'a')
     tags.write(u + "\n")
     tags.close()
 
-    profiles = open('userProfiles.csv', 'a')
+    profiles = open('../site_data/userProfiles.csv', 'a')
     profiles.write(u + ",I am awesome!,profpics/new-user.jpg" + "\n")
     profiles.close()
 

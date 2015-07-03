@@ -111,7 +111,7 @@ def addEntry(item, isImg, isTag, isCap):
     item = commaDeal(item) # HANDLES COMMAS IN USER INPUT
 
     if isTag:
-        file = open('userTags.csv', 'r')
+        file = open('../site_data/userTags.csv', 'r')
         read = file.readlines()
         file.close()
 
@@ -128,14 +128,14 @@ def addEntry(item, isImg, isTag, isCap):
                 post += i
             elif not passed:
                 pre += i
-        file = open('userTags.csv', 'w')
+        file = open('../site_data/userTags.csv', 'w')
         file.write(pre + entry + post)
         file.close()
 
     # --------------------------------------
 
     elif isImg:
-        file = open('userImgs.csv', 'r')
+        file = open('../site_data/userImgs.csv', 'r')
         read = file.readlines()
         file.close()
 
@@ -152,14 +152,14 @@ def addEntry(item, isImg, isTag, isCap):
                 post += i
             elif not passed:
                 pre += i
-        file = open('userImgs.csv', 'w')
+        file = open('../site_data/userImgs.csv', 'w')
         file.write(pre + entry + post)
         file.close()
 
     # --------------------------------------
 
     else:
-        file = open('userCaps.csv', 'r')
+        file = open('../site_data/userCaps.csv', 'r')
         read = file.readlines()
         file.close()
 
@@ -176,7 +176,7 @@ def addEntry(item, isImg, isTag, isCap):
                 post += i
             elif not passed:
                 pre += i
-        file = open('userCaps.csv', 'w')
+        file = open('../site_data/userCaps.csv', 'w')
         file.write(pre + entry + post)
         file.close()
 

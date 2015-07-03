@@ -106,7 +106,7 @@ def galleryList(lines, L):
     return L
 
 def getGallery():
-    file = open('userImgs.csv', 'r')
+    file = open('../site_data/userImgs.csv', 'r')
     imgs = file.readlines()
     file.close()
 
@@ -118,7 +118,7 @@ def getGallery():
         return "Nothing to show today. Try again when you or others have uploaded pics."
     # --------------------------------------
 
-    file = open('userCaps.csv', 'r')
+    file = open('../site_data/userCaps.csv', 'r')
     caps = file.readlines()
     file.close()
 
