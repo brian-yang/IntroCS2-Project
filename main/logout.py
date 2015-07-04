@@ -126,7 +126,7 @@ else:
         htmlStr += "<h3>Logging out...</h3><br>"
         if remFrLoggedIn( fsd['uname'] ):
             htmlStr += "<h3>You have logged out.</h3>"
-            htmlStr += '<br><a class="btn-success" href="'+ loginPage + '">'
+            htmlStr += '<br><a class="btn btn-success" href="'+ loginPage + '">'
             htmlStr += "Log In</a>"
     else:
         htmlStr += "<br><h3>You weren't logged in.</h3>"

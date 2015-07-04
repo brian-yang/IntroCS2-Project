@@ -149,7 +149,7 @@ else:
         session += "<input type='hidden' name='uip' value='" + fsd['uip'] + "' readonly='readonly'>"
 
         #header
-        htmlStr += '<div class="jumbotron">'
+        htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron">'
         htmlStr += '<h1>' + fsd['uname'] + "'s Dashboard</h1></div>"
 
         #form

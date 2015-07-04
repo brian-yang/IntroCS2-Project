@@ -293,8 +293,11 @@ htmlStr += "<body>"
 
 #color the jumbotron's background based on the input
 if 'color' in fsd and isHex(fsd['color']):
-    htmlStr += "<style> .jumbotron { background-color:" + fsd['color'] + "; text-align:center;} </style>"
-
+    bgcolor = fsd['color']
+    text = "black"
+else:
+    bgcolor = "black"
+    text = "white"
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 if not valid():
@@ -305,7 +308,12 @@ else:
     if validated:
 
         #header
-        htmlStr += '<div class="jumbotron" ><h1>' + fsd['uname'] + "'s Display</h1></div>"
+        htmlStr += '<div style="background:' + bgcolor + '; '
+        htmlStr += 'font-family:\'Verdana\'; font-weight:bold; ' + 'color:' + text + '; '
+        htmlStr += '!important" class="jumbotron" >'
+        htmlStr += '<h1>' + fsd['uname'] + "'s Display</h1></div>"
+
+        #clock
         htmlStr += '<div class="clock">' + clock() + "<br></div>"
 
         #links to other pages/navigation

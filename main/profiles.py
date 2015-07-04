@@ -318,7 +318,7 @@ else:
 
         if 'friend' not in fsd: # display own page
             #header
-            htmlStr += '<div class="jumbotron"><h1>' + fsd['uname'] + "'s Profile</h1></div><br>"
+            htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron"><h1>' + fsd['uname'] + "'s Profile</h1></div><br>"
 
             # PROFILE PICTURE
             if 'profilePic' in fsd:

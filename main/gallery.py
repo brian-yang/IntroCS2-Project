@@ -168,7 +168,7 @@ else:
     validated = authSession()
     if validated:
         #header
-        htmlStr += '<div class="jumbotron"><h1>Gallery</h1><br>'
+        htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron"><h1>Gallery</h1><br>'
         htmlStr += "<p>View others' images</p></div><br>"
 
         #gallery

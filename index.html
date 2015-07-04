@@ -15,7 +15,7 @@
 
     </head>
 
-    <body>
+    <body style='background:white'>
         <div style="background:black; font-family:'Verdana'; font-weight:bold; color:white; !important" class="jumbotron">
             <h1>Picsy</h1>
             <p>Code-22</p>
@@ -26,23 +26,52 @@
             <div class="col-md-6">
                 <div class="col1">
                 <p>LOGIN</p>
-                <form type="input" method="POST" action="main/login.py">
-                    Username: <br><input type="text" name="uname"> <br>
-                    Password: <br><input type="password" name="upass"> <br>
+
+                <form type="input" method="POST" action="main/login.py" class="form-horizontal">
+                    <div class="form-group">
+                        <p class="col-sm-3 control-label"> Username: </p>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" style="width:75%" name="uname" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p class="col-sm-3 control-label"> Password: </p>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" style="width:75%" name="upass" placeholder="Password">
+                        </div>
+                    </div>
                     <input type="submit" class="btn btn-success" value="Submit">
                 </form>
+
                 </div>
             </div>
 
             <div class="col-md-6">
                 <div class="col2">
                 <p>SIGNUP</p>
-                <form type="input" method="POST" action="main/register.py">
-                    Username: <br><input type="text" name="uname"><br>
-                    Password: <br><input type="password" name="upass1"><br>
-                    Confirm Password: <br><input type="password" name="upass2"><br>
+
+                <form type="input" method="POST" action="main/register.py" class="form-horizontal">
+                    <div class="form-group">
+                        <p class="col-sm-3 control-label"> Username: </p>
+                        <div class="col-sm-9">
+                            <input type="text" class="form-control" style="width:75%" name="uname" placeholder="Username">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p class="col-sm-3 control-label"> Password: </p>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" style="width:75%" name="upass1" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <p class="col-sm-3 control-label"> Confirm: </p>
+                        <div class="col-sm-9">
+                            <input type="password" class="form-control" style="width:75%" name="upass2" placeholder="Password">
+                        </div>
+                    </div>
                     <input type="submit" class="btn btn-success" value="Submit">
                 </form>
+
                 </div>
             </div>
 
@@ -52,12 +81,9 @@
             <h2>About</h2>
             <p>Upload picture URLs and tag them to set up a gallery of your favorite images.</p>
             <p>See other users' galleries in the public gallery.</p>
+            <br> <br>
+            <p><small>Team Code-22. Pd 5. IntroCS2. Mr. Brown Mykolyk. 2015.</small></p>
         </div>
-
-        <div class="col-md-12 footer">
-            <small>Team Code-22. Pd 5. IntroCS2. Mr. Brown Mykolyk. 2015.</small>
-        </div>
-
     </body>
 
 </html>
