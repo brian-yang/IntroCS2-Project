@@ -1,15 +1,17 @@
 /*PAGE LAYOUT*/
 
-
-.jumbotron {
+html, body {
+    height:100%;
     text-align:center;
 }
 
-
-
-body {
-    margin:auto;
-    text-align:center;
+.wrap {
+    min-height: 100%;
+    height: auto;
+    /* Negative indent footer by its height */
+    margin: 0 auto -190px;
+    /* Pad bottom by footer height */
+    padding: 0 0 190px;
 }
 
 /*--------------------------------------------
@@ -18,7 +20,7 @@ body {
 /*columns*/
 
 .columns {
-    margin:auto;
+    margin:7% auto;
     width:60%;
 }
 
@@ -27,42 +29,20 @@ body {
     background-color:#81DAF5;
     height:240px;
     padding-top:3%;
+    padding-left:3%;
+    border-radius: 6px 6px 6px 6px;
 }
 
-
-.col1 {
-    padding-top:5%;
-}
-
-
-.col-md-6 p {
-    font-family:'Verdana',sans-serif;
+.col-md-6 {
+    font-family:"Courier New", Courier, monospace;
     font-weight:bold;
     font-size:1.2em;
 }
 
 
 .col-md-12 {
-    margin-right:auto;
-    margin-left:auto;
-    text-align:center;
-    height:20%;
-    padding-top:1.5%;
-    padding-bottom:0.5%;
-    margin-top:3%;
-    border-top:solid;
+    height: 190px;
     border-color:#848484;
     background-color:black;
     color:#D8D8D8;
-}
-
-/*---------------------------------------------
-
-/*miscellaneous*/
-form {
-    font-family:'Verdana',sans-serif;
-}
-
-.btn {
-    margin-top:2%;
 }
