@@ -293,6 +293,7 @@ htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
 htmlStr += "<html><head><title>Profile</title>"
 htmlStr += """
         <link rel="stylesheet" type="text/css" href="../css/profiles.css">
+        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -317,6 +318,29 @@ else:
     if validated:
 
         if 'friend' not in fsd: # display own page
+
+            # links to other pages
+            htmlStr += """
+            <div class="navbar navbar-default">
+                <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            """
+            htmlStr += "\t\t<ul class='nav navbar-nav nav-justified'>\n"
+            htmlStr += "<li>" + sessionLinkify("addForm.py","Add Images") + "</li>"
+            htmlStr += "<li>" + sessionLinkify("dashboard.py","Dashboard") + "</li>"
+            htmlStr += "<li>" + sessionLinkify("gallery.py","Gallery") + "</li>"
+            htmlStr += "<li>" + sessionLinkify("profiles.py","My Profile") + "</li>"
+            htmlStr += "<li>" + sessionLinkify("logout.py","Logout") + "</li>"
+            htmlStr += "\t\t</ul>"
+            htmlStr += """
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </div>
+            """
+
             #header
             htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron"><h1>' + fsd['uname'] + "'s Profile</h1></div><br>"
 
@@ -365,8 +389,28 @@ else:
             htmlStr += webpage()
 
         else: # display other person's page
+
+            # links to other pages
+            htmlStr += """
+            <div class="navbar navbar-default">
+                <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+
+                    <!-- Collect the nav links, forms, and other content for toggling -->
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            """
+            htmlStr += "\t\t<ul class='nav navbar-nav nav-justified'>\n"
+            htmlStr += "<li>" + sessionLinkify("profiles.py","Return") + "</li>"
+            htmlStr += "<li>" + sessionLinkify("logout.py","Logout") + "</li>"
+            htmlStr += "\t\t</ul>"
+            htmlStr += """
+                    </div><!-- /.navbar-collapse -->
+                </div><!-- /.container-fluid -->
+            </div>
+            """
+
             #header
-            htmlStr += '<div class="jumbotron"><h1>' + fsd['friend'] + "'s Profile</h1></div><br>"
+            htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron"><h1>' + fsd['friend'] + "'s Profile</h1></div><br>"
 
             htmlStr += "<span class='user'>User: " + fsd['friend'] + "</span><br>\n"
 
@@ -392,12 +436,6 @@ else:
                 htmlStr += tagify("<p>",tagList) + "<br><br>"
             htmlStr += tagify("<p>","Profile Description:") + "<br>\n" + tagify("<p>",getDescription(fsd['friend'])) + "\n"
             htmlStr += webpage()
-
-        #links to other pages
-        htmlStr += "<a href='" + addForm + sessionStr() + "'>Add Items</a><br>"
-        htmlStr += "<a href='" + dashboard + sessionStr() + "'>Dashboard</a><br>"
-        htmlStr += "<a href='" + gallery + sessionStr() + "'>Gallery</a><br><br>"
-        htmlStr += "<br>" + sessionLinkify(logoutPage,'Logout')
 
     else:
         #if user not logged in

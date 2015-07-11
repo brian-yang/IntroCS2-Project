@@ -101,7 +101,7 @@ def remFrLoggedIn(u):
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
 htmlStr += "<html><head><title> Login Results </title>"
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../css/interiorpage.css">
+        <!--<link rel="stylesheet" type="text/css" href="../css/interiorpage.css">-->
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -110,7 +110,7 @@ htmlStr += """
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     </head>
 """
-htmlStr += "<body>"
+htmlStr += "<body style='text-align:center;'>"
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 if not valid():

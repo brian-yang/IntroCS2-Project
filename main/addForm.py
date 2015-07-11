@@ -213,7 +213,7 @@ htmlStr += "<html><head><title> DashMake </title>"
 
 # GETS THE CSS FILES FOR STYLING
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../css/interiorpage.css">
+        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
@@ -222,8 +222,7 @@ htmlStr += """
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
     </head>
 """
-htmlStr += "<body>"
-
+htmlStr += "<body style='text-align:center;'>"
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 
@@ -238,11 +237,36 @@ else:
         session += "<input type='hidden' name='usecret' value='" + fsd['usecret'] + "' readonly='readonly'>"
         session += "<input type='hidden' name='uip' value='" + fsd['uip'] + "' readonly='readonly'>"
 
-        htmlStr += "<h1>Add Images</h1>"
+        # links to other pages
+        htmlStr += """
+        <div class="navbar navbar-default">
+            <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        """
+        htmlStr += "\t\t<ul class='nav navbar-nav nav-justified'>\n"
+        htmlStr += "<li>" + sessionLinkify("addForm.py","Add Images") + "</li>"
+        htmlStr += "<li>" + sessionLinkify("dashboard.py","Dashboard") + "</li>"
+        htmlStr += "<li>" + sessionLinkify("gallery.py","Gallery") + "</li>"
+        htmlStr += "<li>" + sessionLinkify("profiles.py","My Profile") + "</li>"
+        htmlStr += "<li>" + sessionLinkify("logout.py","Logout") + "</li>"
+        htmlStr += "\t\t</ul>"
+        htmlStr += """
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </div>
+        """
+
+        #header
+        htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron">'
+        htmlStr += "<h1>Add Images</h1></div>"
+
+        # BEGINNING OF FORM - input fields for user to input imgs, img captions, and img tags
         htmlStr += '<form type="input" method="GET" action="addForm.py">'
         htmlStr += session
 
-        # input fields for user to input imgs, img captions, and img tags
         htmlStr += """Image URL: <input type="text" name='img'> <br>
                     Caption: <input type="text" name='caption'> <br>
                     Tag: <input type="text" name='tag'> <br><br>
@@ -259,14 +283,6 @@ else:
             htmlStr += "<p><b>Your input has been saved!<br>You may enter another entry.</b><p><br>"
         else:
             htmlStr += "<p><b>You did not fill the URL box and the tag. Do that now!</b></p><br>"
-
-        #Links to other pages
-        htmlStr += "<a href='" + profile + sessionStr() + "'>Your Profile</a><br>"
-        htmlStr += "<a href='" + dashboard + sessionStr() + "'>Dashboard</a><br>"
-        htmlStr += "<a href='" + gallery + sessionStr() + "'>Gallery</a><br>"
-
-        # link to logout
-        htmlStr += "<br>" + sessionLinkify(logoutPage,'Logout')
 
     else:
         htmlStr += "<br>Logged in you are not. Click "
