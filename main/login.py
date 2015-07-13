@@ -186,8 +186,8 @@ else:
         htmlStr += ">Go to my Dashboard</a><br><br>"
 
         #build link w querystring (username+"secret"num+IP)
-        #ADDFORM LINK
-        htmlStr += '<a class="btn btn-success" href=\"' + "addForm.py"
+        #UPLOAD IMAGES LINK
+        htmlStr += '<a class="btn btn-success" href=\"' + "upload.py"
         htmlStr += "?uname=" + fsd['uname']
         htmlStr += "&usecret=" + secretNum
         htmlStr += "&uip=" + userIP + "\""

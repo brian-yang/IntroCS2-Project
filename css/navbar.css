@@ -1,3 +1,8 @@
+.navbar.navbar-default {
+    margin:0 0 0 0;
+    font-weight:bold;
+}
+
 .navbar-nav.nav-justified > li {
     float:none;
 }

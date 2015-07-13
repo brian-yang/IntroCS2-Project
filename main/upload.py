@@ -24,7 +24,7 @@ userfile="../site_data/users.csv"
 currentUsersFile="../site_data/usersOnline.csv"
 
 #page to link to upon successful login:
-addForm="addForm.py"
+upload="upload.py"
 profile="profiles.py"
 gallery="gallery.py"
 display="display.py"
@@ -209,20 +209,23 @@ def formFilled():
 # ========= CONTENT-TYPE LINE REQUIRED. ===========
 # ======= Must be beginning of HTML string ========
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
-htmlStr += "<html><head><title> DashMake </title>"
+htmlStr += "<html><head><title> Upload </title>"
 
 # GETS THE CSS FILES FOR STYLING
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+        <!-- Bootstrap stylesheets must come before custom stylesheets! -->
 
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+        <link rel="stylesheet" type="text/css" href="../css/upload.css">
     </head>
 """
-htmlStr += "<body style='text-align:center;'>"
+htmlStr += "<body style='text-align:center; background:url(\"bg-imgs/art.jpg\"); background-size:cover;'>"
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 
@@ -247,7 +250,7 @@ else:
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         """
         htmlStr += "\t\t<ul class='nav navbar-nav nav-justified'>\n"
-        htmlStr += "<li>" + sessionLinkify("addForm.py","Add Images") + "</li>"
+        htmlStr += "<li>" + sessionLinkify("upload.py","Add Images") + "</li>"
         htmlStr += "<li>" + sessionLinkify("dashboard.py","Dashboard") + "</li>"
         htmlStr += "<li>" + sessionLinkify("gallery.py","Gallery") + "</li>"
         htmlStr += "<li>" + sessionLinkify("profiles.py","My Profile") + "</li>"
@@ -260,18 +263,29 @@ else:
         """
 
         #header
-        htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron">'
+        htmlStr += '<div class="jumbotron">'
         htmlStr += "<h1>Add Images</h1></div>"
 
         # BEGINNING OF FORM - input fields for user to input imgs, img captions, and img tags
-        htmlStr += '<form type="input" method="GET" action="addForm.py">'
+        htmlStr += "<div class='img-form'>"
+        htmlStr += '<form class="form-horizontal" type="input" method="GET" action="upload.py">'
         htmlStr += session
 
-        htmlStr += """Image URL: <input type="text" name='img'> <br>
-                    Caption: <input type="text" name='caption'> <br>
-                    Tag: <input type="text" name='tag'> <br><br>
-                    <input type="submit" value="submit"> <br> <br>
-                    </form>
+        htmlStr += """
+                    <div class="form-group">
+                        <p class="col-sm-5 control-label">Image URL: </b></p>
+                        <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='img'> </div>
+                    </div> <br>
+                    <div class="form-group">
+                        <p class="col-sm-5 control-label">Caption: </p>
+                        <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='caption'> </div>
+                    </div> <br>
+                    <div class="form-group">
+                        <p class="col-sm-5 control-label">Tag: </p>
+                        <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='tag'> </div>
+                    </div> <br><br>
+                    <input class="btn btn-success" type="submit" value="Submit"> <br> <br>
+                </form>
         """
 
         # instructions
@@ -280,9 +294,11 @@ else:
 
         # writes to CSVs and returns True if successful
         if writeCSV():
-            htmlStr += "<p><b>Your input has been saved!<br>You may enter another entry.</b><p><br>"
+            htmlStr += "<p>Your input has been saved!<br>You may enter another entry.</p><br>"
         else:
-            htmlStr += "<p><b>You did not fill the URL box and the tag. Do that now!</b></p><br>"
+            htmlStr += "<p>You did not fill the URL box and the tag. Do that now!</p><br>"
+
+        htmlStr += "</div>"
 
     else:
         htmlStr += "<br>Logged in you are not. Click "

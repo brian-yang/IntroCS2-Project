@@ -21,7 +21,7 @@ userfile="../site_data/users.csv"
 currentUsersFile="../site_data/usersOnline.csv"
 
 #pages to navigate to:
-addForm="addForm.py"
+upload="upload.py"
 gallery = "gallery.py"
 dashboard="dashboard.py"
 
@@ -329,7 +329,7 @@ else:
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             """
             htmlStr += "\t\t<ul class='nav navbar-nav nav-justified'>\n"
-            htmlStr += "<li>" + sessionLinkify("addForm.py","Add Images") + "</li>"
+            htmlStr += "<li>" + sessionLinkify("upload.py","Add Images") + "</li>"
             htmlStr += "<li>" + sessionLinkify("dashboard.py","Dashboard") + "</li>"
             htmlStr += "<li>" + sessionLinkify("gallery.py","Gallery") + "</li>"
             htmlStr += "<li>" + sessionLinkify("profiles.py","My Profile") + "</li>"
