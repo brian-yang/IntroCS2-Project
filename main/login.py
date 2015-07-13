@@ -208,6 +208,13 @@ else:
         htmlStr += "<p><b>Add Images:</b> This is where you can paste your image URLs and save them on our site!</p>"
         htmlStr += "<p><b>Gallery:</b> View some of the images that others on our site have posted!</p>"
 
+        #LOGOUT
+        htmlStr += '<a class="btn btn-success" href=\"' + "logout.py"
+        htmlStr += "?uname=" + fsd['uname']
+        htmlStr += "&usecret=" + secretNum
+        htmlStr += "&uip=" + userIP + "\""
+        htmlStr += ">Logout</a><br><br><br>"
+
 
     else:
         htmlStr += "<p>Username and password don't match. Go back.</p>"
