@@ -27,7 +27,7 @@ currentUsersFile="../site_data/usersOnline.csv"
 #pages to navigate to:
 upload="upload.py"
 profile="profiles.py"
-dashboard="dashboard.py"
+select="select.py"
 
 #login page:
 loginPage="../index.html"
@@ -180,7 +180,7 @@ else:
         """
         htmlStr += "\t\t<ul class='nav navbar-nav nav-justified'>\n"
         htmlStr += "<li>" + sessionLinkify("upload.py","Add Images") + "</li>"
-        htmlStr += "<li>" + sessionLinkify("dashboard.py","Dashboard") + "</li>"
+        htmlStr += "<li>" + sessionLinkify("select.py","Create Display") + "</li>"
         htmlStr += "<li>" + sessionLinkify("gallery.py","Gallery") + "</li>"
         htmlStr += "<li>" + sessionLinkify("profiles.py","My Profile") + "</li>"
         htmlStr += "<li>" + sessionLinkify("logout.py","Logout") + "</li>"

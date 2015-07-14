@@ -122,19 +122,19 @@ def genTagForm(username):
 # ======= Must be beginning of HTML string ========
 
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
-htmlStr += "<html><head><title> " + fsd['uname'] + "'s Dashboard </title>"
+htmlStr += "<html><head><title> Create Display </title>"
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../css/dashboard.css">
-        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../css/select.css">
+        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     </head>
 """
-htmlStr += "<body>"
+htmlStr += "<body style='text-align:center; background:url(\"bg-imgs/art.jpg\"); background-size:cover;'>"
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 
@@ -160,7 +160,7 @@ else:
         """
         htmlStr += "\t\t<ul class='nav navbar-nav nav-justified'>\n"
         htmlStr += "<li>" + sessionLinkify("upload.py","Add Images") + "</li>"
-        htmlStr += "<li>" + sessionLinkify("dashboard.py","Dashboard") + "</li>"
+        htmlStr += "<li>" + sessionLinkify("select.py","Create Display") + "</li>"
         htmlStr += "<li>" + sessionLinkify("gallery.py","Gallery") + "</li>"
         htmlStr += "<li>" + sessionLinkify("profiles.py","My Profile") + "</li>"
         htmlStr += "<li>" + sessionLinkify("logout.py","Logout") + "</li>"
@@ -172,34 +172,37 @@ else:
         """
 
         #header
-        htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron">'
-        htmlStr += '<h1>' + fsd['uname'] + "'s Dashboard</h1></div>"
+        htmlStr += '<div class="jumbotron">'
+        htmlStr += "<h1> Create Display </h1></div>"
 
         #form
+        htmlStr += "<div class='select-form'>"
         htmlStr += "<form type='input' method='GET' action='" + display + "'/>"
 
-
-        #most used tag
-        htmlStr += "<span class='standalone'><input type='checkbox' name='freqTag'>Tell me which tag users use most</span><br><br>"
-
-        #header color
-        htmlStr += "<span class='question'>What color header would you like? (Please enter a hexadecimal representation) </span>"
-        htmlStr += "<input type='text' name='color'> <br><br>"
-
         #choose a tag to show
-        htmlStr += "<span class='question'>From which tags would you like to display content?</span><br> \
+        htmlStr += "From which tags would you like to display content?<br> \
                     If there are no checkboxes below, you haven't added any entries.<br><br>"
         htmlStr += genTagForm(fsd['uname']) + "<br>"
 
         #show captions?
-        htmlStr += "<span class='question'>Do you want to show picture captions?</span><br>"
+        htmlStr += "Do you want to show picture captions?<br>"
         htmlStr += "If you choose to and not all of your images have captions, you might not have any to see.<br>"
         htmlStr += "<input type='checkbox' name='showcap'>Show captions<br><br>"
 
+        #most used tag
+        htmlStr += "<input type='checkbox' name='freqTag'>Tell me which tag users use most.<br><br>"
+
+        #header color
+        htmlStr += "<div class='form-group'>"
+        htmlStr += "What color do you fancy today? (Please enter a hexadecimal representation)"
+        htmlStr += "<input class='form-control' style='width:30%; display:inline-block; margin-left:10px;' type='text' name='color'> <br><br>"
+        htmlStr += "</div>"
+
         #submit button
         htmlStr += session
-        htmlStr += '<input class="btn btn-info" type="submit" value="Submit"><br><br>'
+        htmlStr += '<input class="btn btn-success" type="submit" value="Display"><br><br>'
         htmlStr += "</form>"
+        htmlStr += "</div>"
 
     else:
         #if user not logged in

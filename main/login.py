@@ -40,9 +40,6 @@ userfile="../site_data/users.csv"
 #file to store users currently logged in:
 currentUsersFile="../site_data/usersOnline.csv"
 
-#page to link to upon successful login:
-nextPage="../dashboard/interface.py"
-
 #query string dictionary using CGI
 fsd=cgiDeal.FStoD()
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -178,12 +175,12 @@ else:
         htmlStr += ">View my Profile</a><br><br>"
 
         #build link w querystring (username+"secret"num+IP)
-        #DASHBOARD LINK
-        htmlStr += '<a class="btn btn-success" href=\"' + "dashboard.py"
+        #CREATE DISPLAY LINK
+        htmlStr += '<a class="btn btn-success" href=\"' + "select.py"
         htmlStr += "?uname=" + fsd['uname']
         htmlStr += "&usecret=" + secretNum
         htmlStr += "&uip=" + userIP + "\""
-        htmlStr += ">Go to my Dashboard</a><br><br>"
+        htmlStr += ">Create Display</a><br><br>"
 
         #build link w querystring (username+"secret"num+IP)
         #UPLOAD IMAGES LINK
@@ -204,7 +201,7 @@ else:
         #HELP
         htmlStr += "<h4>Confused?</h4>"
         htmlStr += "<p><b>Profile:</b> You can add an image of yourself and a description so others can know who you are.</p>"
-        htmlStr += "<p><b>Dashboard:</b> On your dashboard, you can choose what to display. Then click display to see them!</p>"
+        htmlStr += "<p><b>Create Display:</b> On this page, choose what images you want to display. Then click display to see them!</p>"
         htmlStr += "<p><b>Add Images:</b> This is where you can paste your image URLs and save them on our site!</p>"
         htmlStr += "<p><b>Gallery:</b> View some of the images that others on our site have posted!</p>"
 
