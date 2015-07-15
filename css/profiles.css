@@ -1,14 +1,11 @@
-/*HEADER*/
-
 .jumbotron {
-    text-align:center;
-    width:100%;
+    background:black;
+    font-family:Verdana;
+    font-weight:bold;
+    color:white;
+    margin-bottom: 0px;
 }
 
-/*----------------------------------
-
-
-/*PROFILE*/
 
 body {
     margin:auto;

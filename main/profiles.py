@@ -85,59 +85,58 @@ def sessionLinkify(dst,visText):
     retStr += "</a>"
     return retStr
 
+#create hidden inputs containing this user's session string to be submitted with the forms
+def sessionForm():
+    session = "<input type='hidden' name='uname' value='" + fsd['uname'] + "' readonly='readonly'>"
+    session += "<input type='hidden' name='usecret' value='" + fsd['usecret'] + "' readonly='readonly'>"
+    session += "<input type='hidden' name='uip' value='" + fsd['uip'] + "' readonly='readonly'>"
+    return session
+
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# GET LIST OF USERS FROM CSV FILES
 def getUsers(username):
+    userL = []
 
     file = open('../site_data/userProfiles.csv', 'r')
     lines = file.readlines()
     file.close()
 
-    userL = []
+    pos = 0
+    while pos < len(lines):
+        lines[pos] = lines[pos][:-1]
+        if lines[pos].split(',')[0] != username:
+            userL.append(lines[pos].split(",")[0])
+            break
+        pos += 1
 
-    for i in lines:
-        if i.split(',')[0] != username and i.split(",")[0] != username + "\n":
-            if i.split(",")[0][-1] == "\n":
-                userL.append(i.split(",")[0][:-1])
-            else:
-                userL.append(i.split(",")[0])
-    return userL
-
-def userSelect(username):
-
-    userL = getUsers(username)
-
+    # generates a dropdown menu containing a list of users
     s = "<select name='friend'>\n"
 
     for user in userL:
-        s += "<option value='" + user + "'>" + user + "</option>\n"
+        s += "\t<option value='" + user + "'>" + user + "</option>\n"
 
-    s += "</select>"
+    s += "</select>\n"
+
     return s
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+# GET AND WRITE PROFILE PIC PREFERENCES TO CSV FILES
 def getPic(username):
-    s = "<div class='square'>\n"
-
     image = ""
 
     file = open('../site_data/userProfiles.csv', 'r')
     lines = file.readlines()
     file.close()
 
-    # removes newlines
     pos = 0
     while pos < len(lines):
         lines[pos] = lines[pos][:-1]
+        if lines[pos].split(',')[0] == username:
+            image = lines[pos].split(',')[2]
+            break
         pos += 1
 
-    for i in lines:
-        if i.split(',')[0] == username or i.split(",")[0] == username + "\n":
-            image = i.split(',')[2]
-
-    s += "<img src='" + image.replace("~~",",") + "' />"
-
-    s += "</div><br>"
-    return s
+    return "\t<div class='square'>\n\t\t<img src='" + image.replace("~~",",") + "' />\n\t</div><br>"
 
 def writePic(img):
     try:
@@ -168,7 +167,7 @@ def writePic(img):
         htmlStr += "ERROR!"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+# GET TAGS FROM CSV FILES
 def getTags(username):
     L = []
 
@@ -176,22 +175,20 @@ def getTags(username):
     lines = file.readlines()
     file.close()
 
-    # removes newlines
     pos = 0
     while pos < len(lines):
         lines[pos] = lines[pos][:-1]
+        if lines[pos].split(",")[0] == username:
+            L.extend(lines[pos].split(",")[1:])
+            break
         pos += 1
-
-    # gets the tags
-    for line in lines:
-        if line.split(",")[0] == username:
-            L.extend(line.split(",")[1:])
 
     return L
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+# GET AND WRITE DESCRIPTIONS TO CSV FILES
 def getDescription(username):
+    desc = ""
 
     file = open('../site_data/userProfiles.csv', 'r')
     lines = file.readlines()
@@ -201,13 +198,12 @@ def getDescription(username):
     pos = 0
     while pos < len(lines):
         lines[pos] = lines[pos][:-1]
+        if lines[pos].split(",")[0] == username:
+             desc = lines[pos].split(",")[1].replace("~~",",").replace("@@","<br>")
+             break
         pos += 1
 
-    # gets the tags
-    for line in lines:
-        if line.split(",")[0] == username:
-            return line.split(",")[1].replace("~~",",").replace("@@","<br>")
-    return ""
+    return desc
 
 def writeDescription(description):
     try:
@@ -239,49 +235,58 @@ def writeDescription(description):
         htmlStr += "ERROR!"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
+# HTML GENERATOR FUNCTIONS
 def profDescription():
-    session = "<input type='hidden' name='uname' value='" + fsd['uname'] + "' readonly='readonly'>"
-    session += "<input type='hidden' name='usecret' value='" + fsd['usecret'] + "' readonly='readonly'>"
-    session += "<input type='hidden' name='uip' value='" + fsd['uip'] + "' readonly='readonly'>"
-
-    # form for description
     html = "<br><br>Update your description.<br>"
     html += "<form name='desc' type='input' method='GET' action='profiles.py'>"
     html += "<textarea name='description'>I am awesome!</textarea><br>"
-    html += session
+    html += sessionForm()
     html += "<input type='submit' value='Submit'>"
     html += "</form><br><br>"
 
     return html
 
 def profImg():
-    session = "<input type='hidden' name='uname' value='" + fsd['uname'] + "' readonly='readonly'>"
-    session += "<input type='hidden' name='usecret' value='" + fsd['usecret'] + "' readonly='readonly'>"
-    session += "<input type='hidden' name='uip' value='" + fsd['uip'] + "' readonly='readonly'>"
-
-    # form for changing the profile image
     html = "<br><br>Change your profile picture by adding a URL!<br>"
     html += "<form name='profimg' type='input' method='GET' action='profiles.py'>"
-    html += session
     html += "<input type='text' name='profilePic'>"
+    html += sessionForm()
     html += "<input type='submit' value='Submit'>"
     html += "</form><br><br>"
 
     return html
 
-def webpage():
-    session = "<input type='hidden' name='uname' value='" + fsd['uname'] + "' readonly='readonly'>"
-    session += "<input type='hidden' name='usecret' value='" + fsd['usecret'] + "' readonly='readonly'>"
-    session += "<input type='hidden' name='uip' value='" + fsd['uip'] + "' readonly='readonly'>"
+def profile(user):
+    html = '<div class="jumbotron"><h1>' + user + "'s Profile</h1></div><br>"
+    html += getPic(user)
+    html += displayTags(user)
+    html += tagify("<p>","Profile Description:") + "<br>\n" + tagify("<p>",getDescription(user)) + "\n"
 
-    # form for viewing other peoples' pages
+    return html
+
+def viewFriend():
     html = "<br><br>View other peoples' webpages.<br>"
     html += "<form name='webpage' type='input' method='GET' action='profiles.py'>"
-    html += userSelect(fsd['uname'])
-    html += session
+    html += getUsers(fsd['uname'])
+    html += sessionForm()
     html += "<input type='submit' value='Submit'>"
     html += "</form><br><br>"
+
+    return html
+
+def displayTags(user):
+    html = "<h3>Tags:</h3>"
+    profTags = getTags(user)
+
+    if profTags == []:
+        html += "<br>No tags found.<br>"
+    else:
+        pos = 0
+        while pos < len(profTags):
+            profTags[pos] = profTags[pos].replace("~~",",")
+            pos += 1
+        profTags = set(profTags)
+        html += "<p>" + ", ".join(profTags) + "</p>"
 
     return html
 
@@ -292,18 +297,18 @@ def webpage():
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
 htmlStr += "<html><head><title>Profile</title>"
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../css/profiles.css">
-        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../css/profiles.css">
+        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     </head>
 
 """
-htmlStr += "<body>"
+htmlStr += "<body style='text-align:center; background:url(\"bg-imgs/art.jpg\"); background-size:cover;'>"
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 
 #wrap an html tag around a string
@@ -341,52 +346,25 @@ else:
             </div>
             """
 
-            #header
-            htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron"><h1>' + fsd['uname'] + "'s Profile</h1></div><br>"
-
-            # PROFILE PICTURE
+            # UPDATE PROFILE
             if 'profilePic' in fsd:
                 try:
                     writePic(fsd['profilePic'])
                 except:
                     htmlStr += "Change failed!\n"
 
-            htmlStr += getPic(fsd['uname'])
-
-            htmlStr += tagify("<h3>","User:")
-            htmlStr += tagify("<p>",fsd['uname']) + "<br>\n"
-
-            # TAGS
-            htmlStr += "<br><h3>Tags:</h3> "
-            profTags = getTags(fsd['uname'])
-            if profTags == []:
-                htmlStr += "<br>No tags found.<br><br>"
-            else:
-                pos = 0
-                while pos < len(profTags):
-                    profTags[pos] = profTags[pos].replace("~~",",")
-                    pos += 1
-                tagList = ""
-                usedTags = []
-                for tag in profTags:
-                    if tag not in usedTags:
-                        tagList += tag + ", "
-                        usedTags.append(tag)
-                htmlStr += "<p>" + tagList + "</p>"
-                htmlStr += "<br><br>"
-
             if 'description' in fsd:
                 try:
                     writeDescription(fsd['description'])
                 except:
-                    htmlStr += "Update failed!\n"
+                    htmlStr += "Change failed!\n"
 
-            htmlStr += tagify("<h3>","Profile Description:") + "<br>\n" + tagify("<p>",getDescription(fsd['uname'])) + "\n"
+            htmlStr += profile(fsd['uname'])
 
-            # UPDATE FORM
+            # UPDATE FORMS
             htmlStr += profDescription()
             htmlStr += profImg()
-            htmlStr += webpage()
+            htmlStr += viewFriend()
 
         else: # display other person's page
 
@@ -409,33 +387,10 @@ else:
             </div>
             """
 
-            #header
-            htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron"><h1>' + fsd['friend'] + "'s Profile</h1></div><br>"
+            htmlStr += profile(fsd['friend'])
 
-            htmlStr += "<span class='user'>User: " + fsd['friend'] + "</span><br>\n"
-
-            # PROFILE PICTURE
-            htmlStr += getPic(fsd['friend'])
-
-            # TAGS
-            htmlStr += "<br><h3>Tags:</h3> "
-            profTags = getTags(fsd['friend'])
-            if profTags == []:
-                htmlStr += "<br>No tags found.<br><br>"
-            else:
-                pos = 0
-                while pos < len(profTags):
-                    profTags[pos] = profTags[pos].replace("~~",",")
-                    pos += 1
-                tagList = ""
-                usedTags = []
-                for tag in profTags:
-                    if tag not in usedTags:
-                        tagList += tag + ","
-                        usedTags.append(tag)
-                htmlStr += tagify("<p>",tagList) + "<br><br>"
-            htmlStr += tagify("<p>","Profile Description:") + "<br>\n" + tagify("<p>",getDescription(fsd['friend'])) + "\n"
-            htmlStr += webpage()
+            # UPDATE FORM
+            htmlStr += viewFriend()
 
     else:
         #if user not logged in
