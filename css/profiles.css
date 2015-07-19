@@ -7,22 +7,46 @@
 }
 
 
-body {
-    margin:auto;
-    text-align:center;
-    font-size:1.2em;
+.profile-content {
+    margin: 0px 200px;
+    padding: 5% 0%;
+    background-color:#6495ED;
+    font-size: 150%;
+    font-weight: bold;
+    min-height: 100%;
 }
 
-img {
-    width:30%;
-    height:auto;
-    padding:0px;
-}
-
-
+/*FOR IMG*/
 .square {
-    margin:auto;
-    width:30%;
-    border:solid;
-    border-width:25px;
+    height: 15%;
+    width: auto;
+}
+
+/*FOR IMG FORM*/
+.prof-img {
+    width: 33%;
+}
+
+/*FOR SELECT FORM*/
+.dropdown_container {
+    display: table;
+    margin: 0px auto;
+}
+
+.dropdown_class {
+    width:auto;
+}
+
+/*IE FIX FOR SELECT FORM*/
+#dropdown_id {
+    width:100%;
+}
+
+:focus#dropdown_id {
+    width:auto\9;
+}
+
+/*FOR TEXTAREA FORM*/
+.textarea {
+    width: 50%;
 }

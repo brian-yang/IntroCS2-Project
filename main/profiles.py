@@ -110,12 +110,13 @@ def getUsers(username):
         pos += 1
 
     # generates a dropdown menu containing a list of users
-    s = "<select name='friend'>\n"
+    s = "<div class='dropdown_container'>"
+    s += "<select class='form-control dropdown_class' id='dropdown_id' name='friend'>\n"
 
     for user in userL:
         s += "\t<option value='" + user + "'>" + user + "</option>\n"
 
-    s += "</select>\n"
+    s += "</select>\n</div>\n<br>"
 
     return s
 
@@ -136,7 +137,7 @@ def getPic(username):
             break
         pos += 1
 
-    return "\t<div class='square'>\n\t\t<img src='" + image.replace("~~",",") + "' />\n\t</div><br>"
+    return "\t<img class='square' src='" + image.replace("~~",",") + "' />\t<br>\n"
 
 def writePic(img):
     try:
@@ -237,30 +238,42 @@ def writeDescription(description):
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # HTML GENERATOR FUNCTIONS
 def profDescription():
-    html = "<br><br>Update your description.<br>"
-    html += "<form name='desc' type='input' method='GET' action='profiles.py'>"
-    html += "<textarea name='description'>I am awesome!</textarea><br>"
+    html = "<form name='desc' type='input' method='GET' action='profiles.py'>"
+    html += "<div class='form-group'>"
+    html += "<br><label for='description'>Update your description.</label><br>"
+    html += "<textarea class='form-control col-md-offset-3 textarea' rows='5' name='description' placeholder='I am awesome!'></textarea><br>"
     html += sessionForm()
-    html += "<input type='submit' value='Submit'>"
-    html += "</form><br><br>"
+    html += "<input class='btn btn-success' type='submit' value='Submit'>"
+    html += "</div>"
+    html += "</form><br>"
 
     return html
 
 def profImg():
     html = "<br><br>Change your profile picture by adding a URL!<br>"
     html += "<form name='profimg' type='input' method='GET' action='profiles.py'>"
-    html += "<input type='text' name='profilePic'>"
+    html += "<input class='form-control col-md-offset-4 prof-img' type='text' name='profilePic'><br>"
     html += sessionForm()
-    html += "<input type='submit' value='Submit'>"
+    html += "<input class='btn btn-success' type='submit' value='Submit'>"
     html += "</form><br><br>"
 
     return html
 
 def profile(user):
-    html = '<div class="jumbotron"><h1>' + user + "'s Profile</h1></div><br>"
+    html = "<div class='profile-content'>"
+    # Profile image
     html += getPic(user)
+    if 'friend' not in fsd:
+        html += profImg()
+    #Profile description
+    html += tagify("<p>","Profile Description:") + tagify("<h3>",getDescription(user)) + "\n"
+    if 'friend' not in fsd:
+        html += profDescription()
+    # User Tags
     html += displayTags(user)
-    html += tagify("<p>","Profile Description:") + "<br>\n" + tagify("<p>",getDescription(user)) + "\n"
+    # View Friend
+    html += viewFriend()
+    html += "</div>"
 
     return html
 
@@ -269,17 +282,17 @@ def viewFriend():
     html += "<form name='webpage' type='input' method='GET' action='profiles.py'>"
     html += getUsers(fsd['uname'])
     html += sessionForm()
-    html += "<input type='submit' value='Submit'>"
+    html += "<input class='btn btn-success' type='submit' value='Submit'>"
     html += "</form><br><br>"
 
     return html
 
 def displayTags(user):
-    html = "<h3>Tags:</h3>"
+    html = "<br><p>Tags:</p>"
     profTags = getTags(user)
 
     if profTags == []:
-        html += "<br>No tags found.<br>"
+        html += "<h3>No tags found.</h3><br>"
     else:
         pos = 0
         while pos < len(profTags):
@@ -345,6 +358,7 @@ else:
                 </div><!-- /.container-fluid -->
             </div>
             """
+            htmlStr += '<div class="jumbotron"><h1>' + fsd['uname'] + "'s Profile</h1></div>"
 
             # UPDATE PROFILE
             if 'profilePic' in fsd:
@@ -360,11 +374,6 @@ else:
                     htmlStr += "Change failed!\n"
 
             htmlStr += profile(fsd['uname'])
-
-            # UPDATE FORMS
-            htmlStr += profDescription()
-            htmlStr += profImg()
-            htmlStr += viewFriend()
 
         else: # display other person's page
 
@@ -386,11 +395,9 @@ else:
                 </div><!-- /.container-fluid -->
             </div>
             """
+            htmlStr += '<div class="jumbotron"><h1>' + fsd['friend'] + "'s Profile</h1></div>"
 
             htmlStr += profile(fsd['friend'])
-
-            # UPDATE FORM
-            htmlStr += viewFriend()
 
     else:
         #if user not logged in
