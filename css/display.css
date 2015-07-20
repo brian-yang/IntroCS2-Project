@@ -1,4 +1,8 @@
-/*HEADER*/
+body {
+    text-align:center;
+    background:url(bg-imgs/art.jpg); 
+    background-size:cover;
+}
 
 .jumbotron {
     background:black;

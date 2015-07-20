@@ -1,3 +1,9 @@
+body {
+    text-align:center;
+    background:url(http://miriadna.com/desctopwalls/images/max/Walking-path.jpg);
+    background-size:cover;
+}
+
 .wrap {
     background-color: white;
     margin: 10% 30%;

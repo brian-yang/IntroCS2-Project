@@ -225,7 +225,7 @@ htmlStr += """
         <link rel="stylesheet" type="text/css" href="../css/upload.css">
     </head>
 """
-htmlStr += "<body style='text-align:center; background:url(\"bg-imgs/art.jpg\"); background-size:cover;'>"
+htmlStr += "<body>"
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 

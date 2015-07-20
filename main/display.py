@@ -311,7 +311,7 @@ htmlStr += """
         <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     </head>
 """
-htmlStr += "<body style='text-align:center; background:url(\"bg-imgs/art.jpg\"); background-size:cover;'>"
+htmlStr += "<body>"
 
 #color the jumbotron's background based on the input
 if 'color' in fsd and isHex(fsd['color']):

@@ -321,7 +321,7 @@ htmlStr += """
     </head>
 
 """
-htmlStr += "<body style='text-align:center; background:url(\"bg-imgs/art.jpg\"); background-size:cover;'>"
+htmlStr += "<body>"
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 
 #wrap an html tag around a string

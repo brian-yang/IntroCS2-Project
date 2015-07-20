@@ -132,7 +132,7 @@ htmlStr += """
         <link rel="stylesheet" type="text/css" href="../css/login.css">
     </head>
 """
-htmlStr += "<body style='text-align:center; background:url(http://miriadna.com/desctopwalls/images/max/Walking-path.jpg); background-size:cover;'>"
+htmlStr += "<body>"
 # needs to have http link to image
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
