@@ -242,6 +242,27 @@ def maxTags():
             number = len(tags)
     return number
 
+#returns an html string containing the chosen caps and imgs
+def printImgs():
+    html = ""
+    number = maxTags()
+    for i in range(1, number + 1):
+        if str(i) in fsd:
+
+            capL = getCaps(fsd[str(i)])
+            imgL = getImgs(fsd[str(i)])
+
+            pos = 0
+            while pos < len(capL):
+                html += "<div class='imgandcap'><img src='"
+                html += imgL[pos].replace("~~",",") + "'" + " alt='"
+                html += capL[pos].replace("~~",",") + "'/><br>"
+                if 'showcap' in fsd:
+                    html += "<div class='cap'>" + capL[pos].replace("~~",",") + "</div><br><br>"
+                html += "</div>"
+                pos += 1
+
+    return html
 # =================== CLOCK WIDGET =====================
 
 #calc time
@@ -280,17 +301,17 @@ def formatTime(timeStr):
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
 htmlStr += "<html><head><title>" + fsd['uname'] + "'s Display </title>"
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../css/display.css">
-        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../css/display.css">
+        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     </head>
 """
-htmlStr += "<body>"
+htmlStr += "<body style='text-align:center; background:url(\"bg-imgs/art.jpg\"); background-size:cover;'>"
 
 #color the jumbotron's background based on the input
 if 'color' in fsd and isHex(fsd['color']):
@@ -336,6 +357,9 @@ else:
         htmlStr += '!important" class="jumbotron" >'
         htmlStr += '<h1>' + fsd['uname'] + "'s Display</h1></div>"
 
+        #blue background div
+        htmlStr += "<div class='display-content'>"
+
         #clock
         htmlStr += '<div class="clock">' + clock() + "<br></div>"
 
@@ -343,27 +367,9 @@ else:
         if 'freqTag' in fsd:
             htmlStr += "Most used tags: " + mostUsedTag() + "<br>"
 
-        # PRINT CHOSEN TAG'S CAPTION AND IMAGE
+        htmlStr += printImgs()
 
-        number = maxTags()
-        for i in range(1, number + 1):
-            if str(i) in fsd:
-
-                capL = getCaps(fsd[str(i)])
-                imgL = getImgs(fsd[str(i)])
-
-                pos = 0
-                while pos < len(capL):
-                    htmlStr += "<div class='imgandcap'><img src='"
-                    htmlStr += imgL[pos].replace("~~",",") + "'" + " alt='"
-                    htmlStr += capL[pos].replace("~~",",") + "'/><br>"
-                    if 'showcap' in fsd:
-                        htmlStr += "<div class='cap'>" + capL[pos].replace("~~",",") + "</div><br><br>"
-                    htmlStr += "</div>"
-                    pos += 1
-
-        #    htmlStr += "You have not selected any preferences yet." + \
-        #    "Go to the dashboard to select items to display on this page."
+        htmlStr += "</div>"
 
     else:
         #if user not logged in
