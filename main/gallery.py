@@ -149,17 +149,17 @@ def getGallery():
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
 htmlStr += "<html><head><title>Gallery</title>"
 htmlStr += """
-        <link rel="stylesheet" type="text/css" href="../css/display.css">
-        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../css/gallery.css">
+        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
     </head>
 """
-htmlStr += "<body>"
+htmlStr += "<body style='text-align:center; background:url(\"bg-imgs/art.jpg\"); background-size:cover;'>"
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 
@@ -193,12 +193,12 @@ else:
 
         #header
         htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron"><h1>Gallery</h1><br>'
-        htmlStr += "<p>View others' images</p></div><br>"
+        htmlStr += "<p>View others' images</p></div>"
 
         #gallery
+        htmlStr += "<div class='gallery-content'>"
         htmlStr += getGallery()
-        htmlStr += "<br><br>"
-
+        htmlStr += "</div>"
     else:
         #if user not logged in
         htmlStr += "<br>Logged in you are not. Click "
