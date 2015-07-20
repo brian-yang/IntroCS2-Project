@@ -123,16 +123,17 @@ def remFrLoggedIn(u):
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
 htmlStr += "<html><head><title> Login Results </title>"
 htmlStr += """
-        <!--<link rel="stylesheet" type="text/css" href="../css/interiorpage.css">-->
-
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="../css/login.css">
     </head>
 """
-htmlStr += "<body style='text-align:center;'>"
+htmlStr += "<body style='text-align:center; background:url(http://miriadna.com/desctopwalls/images/max/Walking-path.jpg); background-size:cover;'>"
+# needs to have http link to image
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 if not valid():
@@ -163,6 +164,10 @@ else:
         #write user record to logged-in-users file
         addToLoggedIn( fsd['uname'], secretNum, userIP )
 
+        #SITE MAP
+        htmlStr += "<div class='wrap'>"
+
+        #Successful login message
         htmlStr += "<h3>You've logged in.</h3><br>"
         htmlStr += "<p>Pick what you'd like to do next.</p>"
 
@@ -188,7 +193,7 @@ else:
         htmlStr += "?uname=" + fsd['uname']
         htmlStr += "&usecret=" + secretNum
         htmlStr += "&uip=" + userIP + "\""
-        htmlStr += ">Add images</a><br><br>"
+        htmlStr += ">Add Images</a><br><br>"
 
         #build link w querystring (username+"secret"num+IP)
         #GALLERY LINK
@@ -211,6 +216,8 @@ else:
         htmlStr += "&usecret=" + secretNum
         htmlStr += "&uip=" + userIP + "\""
         htmlStr += ">Logout</a><br><br><br>"
+
+        htmlStr += "</div>"
 
 
     else:
