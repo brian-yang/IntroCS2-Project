@@ -1,6 +1,6 @@
 body {
     text-align:center;
-    background:url(http://miriadna.com/desctopwalls/images/max/Walking-path.jpg);
+    background:url(http://miriadna.com/desctopwalls/images/max/Walking-path.jpg); /*looks for images from the viewpoint of the css file*/
     background-size:cover;
 }
 
