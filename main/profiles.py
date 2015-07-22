@@ -3,6 +3,10 @@
 # ========= (Must be first line of file.) =========
 
 #===================== IMPORT =======================
+# modules help verify if link is valid image
+import imghdr # checks for proper image
+import httplib # makes an HTTP connection to the URL
+import cStringIO # reads strings from and writes strings to output
 
 import cgi
 import cgitb
@@ -141,6 +145,11 @@ def getPic(username):
 
 def writePic(img):
     try:
+        if img.startswith("https://"): #removes https:// from link due to imgs not appearing
+            img = img[8:]
+        if not img.startswith("http://"): #adds https:// to ensure img appears
+            img = "http://" + img
+
         file = open('../site_data/userProfiles.csv', 'r')
         lines = file.readlines()
         file.close()
@@ -166,6 +175,43 @@ def writePic(img):
         file.close()
     except:
         htmlStr += "ERROR!"
+
+#check if the img URL is valid
+def validURL():
+    url = fsd['profilePic']
+
+    #remove the http:// prefix to the url
+    if url.startswith("http://"):
+        url = url[7:]
+    elif url.startswith("https://"):
+        url = url[8:]
+
+    #split url into domain name and path
+    if url.find("/") != -1:
+        url = url.split("/", 1)
+        main = url[0]
+        path = url[1]
+    else:
+        main = url
+        path = ""
+
+    try:
+        #make connection
+        conn = httplib.HTTPConnection(main, timeout=60)
+        conn.request('GET', '/' + path)
+
+        #get response
+        resp = conn.getresponse()
+
+        #check image file type
+        image_file_obj = cStringIO.StringIO(resp.read())
+        image_type = imghdr.what(image_file_obj)
+        if image_type is not None:
+            return True
+        else:
+            return False
+    except:
+        return "error"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 # GET TAGS FROM CSV FILES
@@ -254,6 +300,9 @@ def profImg():
     html += "<form name='profimg' type='input' method='GET' action='profiles.py'>"
     html += "<input class='form-control col-md-offset-4 prof-img' type='text' name='profilePic'><br>"
     html += sessionForm()
+    html += "If your profile picture does not change, you may have entered in an invalid URL. <br>See "
+    html += "<a href='https://docs.python.org/2/library/imghdr.html'>here</a>"
+    html += " for acceptable image formats.<br><br>"
     html += "<input class='btn btn-success' type='submit' value='Submit'>"
     html += "</form><br><br>"
 
@@ -362,10 +411,14 @@ else:
 
             # UPDATE PROFILE
             if 'profilePic' in fsd:
-                try:
-                    writePic(fsd['profilePic'])
-                except:
-                    htmlStr += "Change failed!\n"
+                imgFound = validURL()
+                if imgFound == True:
+                    try:
+                        writePic(fsd['profilePic'])
+                    except:
+                        htmlStr += "Change failed!\n"
+                else:
+                    htmlStr += str(imgFound)
 
             if 'description' in fsd:
                 try:
