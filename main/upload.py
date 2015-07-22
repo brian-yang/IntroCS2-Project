@@ -3,6 +3,11 @@
 # ========= (Must be first line of file.) =========
 
 # ================= IMPORTS ====================
+# modules help verify if link is valid image
+import imghdr # checks for proper image
+import httplib # makes an HTTP connection to the URL
+import cStringIO # reads strings from and writes strings to output
+
 import os
 import cgi
 import cgitb
@@ -135,6 +140,11 @@ def addEntry(item, isImg, isTag, isCap):
     # --------------------------------------
 
     elif isImg:
+        if item.startswith("https://"): #removes https:// from link due to imgs not appearing
+            item = item[8:]
+        if not item.startswith("http://") : #adds https:// to ensure img appears
+            item = "http://" + item
+
         file = open('../site_data/userImgs.csv', 'r')
         read = file.readlines()
         file.close()
@@ -180,22 +190,44 @@ def addEntry(item, isImg, isTag, isCap):
         file.write(pre + entry + post)
         file.close()
 
+#--------------USER INPUT FUNCTIONS------------
 
-#write to the CSV file
-def writeCSV():
-    if formFilled():
-        try:
-            addEntry(fsd['tag'], False, True, False)
-            if 'caption' not in fsd:
-                addEntry(' ',False,False,True)
-            else:
-                addEntry(fsd['caption'], False, False, True)
-            addEntry(fsd['img'], True, False, False)
-            return True
-        except:
-            return False
+#check if the img URL is valid
+def validURL():
+    url = fsd['img']
+
+    #remove the http:// prefix to the url
+    if url.startswith("http://"):
+        url = url[7:]
+    elif url.startswith("https://"):
+        url = url[8:]
+
+    #split url into domain name and path
+    if url.find("/") != -1:
+        url = url.split("/", 1)
+        main = url[0]
+        path = url[1]
     else:
-        return False
+        main = url
+        path = ""
+
+    try:
+        #make connection
+        conn = httplib.HTTPConnection(main, timeout=60)
+        conn.request('GET', '/' + path)
+
+        #get response
+        resp = conn.getresponse()
+
+        #check image file type
+        image_file_obj = cStringIO.StringIO(resp.read())
+        image_type = imghdr.what(image_file_obj)
+        if image_type is not None:
+            return True
+        else:
+            return False
+    except:
+        return "error" #error means that the url could not be recognized
 
 
 #is form filled correctly?
@@ -203,7 +235,32 @@ def formFilled():
     if 'tag' not in fsd or 'img' not in fsd:
         return False
     else:
-        return True
+        imgFound = validURL()
+        if imgFound == "error":
+            return "error"
+        elif imgFound == True:
+            return True
+        elif imgFound == False:
+            return False
+
+#write to the CSV file
+def writeCSV():
+    filled = formFilled()
+    if filled == "error":
+        return "error"
+    elif filled == True:
+        try:
+            addEntry(fsd['img'], True, False, False)
+            addEntry(fsd['tag'], False, True, False)
+            if 'caption' not in fsd:
+                addEntry(' ',False,False,True)
+            else:
+                addEntry(fsd['caption'], False, False, True)
+            return True
+        except:
+            return False
+    elif filled == False:
+        return False
 
 
 # ========= CONTENT-TYPE LINE REQUIRED. ===========
@@ -277,7 +334,7 @@ else:
                         <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='img'> </div>
                     </div> <br>
                     <div class="form-group">
-                        <p class="col-sm-5 control-label">Caption: </p>
+                        <p class="col-sm-5 control-label">Caption: (optional) </p>
                         <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='caption'> </div>
                     </div> <br>
                     <div class="form-group">
@@ -289,14 +346,22 @@ else:
         """
 
         # instructions
-        htmlStr += "<p>Please fill out the three boxes of the form above with a valid image URL<br>(you can right click on an image and select the option \
-            to copy its URL),<br>a caption that will be displayed if the image fails, and a tag to organize your images. Captions are optional.</p><br>"
+        htmlStr += """<p>To display your uploaded images, go to the 'create display' page and fill out the form.<br>
+<br>Note: All images categorized under a certain tag will be displayed at the same time
+if you select the tag in the display form. <br>Captions will appear if you hover over images.
+<br>In addition, the Python script verifies if there is an image at the URL with the imghdr Python module.
+<br>Click <a href='https://docs.python.org/2/library/imghdr.html'>here</a> to see all accepted image formats.</p>
+"""
 
         # writes to CSVs and returns True if successful
-        if writeCSV():
-            htmlStr += "<p>Your input has been saved!<br>You may enter another entry.</p><br>"
-        else:
-            htmlStr += "<p>You did not fill the URL box and the tag. Do that now!</p><br>"
+        uploadStatus = writeCSV()
+        if uploadStatus == "error":
+            htmlStr += "<br><p style='color:red'>The URL you provided could not be found. Please try again.</p><br>"
+        elif uploadStatus == False:
+            htmlStr += "<br><p style='color:purple'>You either did not fill out all the required forms (image url and tag), or your image could not be recognized. Do that now!</p><br>"
+        elif uploadStatus == True:
+            htmlStr += "<br><p style='color:green'>Your input has been saved!<br>You may enter another entry.</p><br>"
+
 
         htmlStr += "</div>"
 
