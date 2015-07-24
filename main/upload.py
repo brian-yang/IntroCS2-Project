@@ -349,7 +349,10 @@ else:
 <br>Note: All images categorized under a certain tag will be displayed at the same time
 if you select the tag in the display form. <br>Captions will appear if you hover over images.
 <br>In addition, the Python script verifies if there is an image at the URL with the imghdr Python module.
-<br>Click <a href='https://docs.python.org/2/library/imghdr.html'>here</a> to see all accepted image formats.</p>
+<br>Click <a href='https://docs.python.org/2/library/imghdr.html'>here</a> to see all accepted image formats.
+<br>Please make sure that the URL you provide contains only the image, like
+<a href='http://www.quicksprout.com/images/foggygoldengatebridge.jpg'>this</a>.
+</p>
 """
 
         # writes to CSVs and returns True if successful

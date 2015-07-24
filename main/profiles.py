@@ -302,7 +302,9 @@ def profImg():
     html += sessionForm()
     html += "If your profile picture does not change, you may have entered in an invalid URL. <br>See "
     html += "<a href='https://docs.python.org/2/library/imghdr.html'>here</a>"
-    html += " for acceptable image formats.<br><br>"
+    html += " for acceptable image formats.<br>"
+    html += "Please make sure that the URL you provide contains only the image, like "
+    html += "<a href='http://www.quicksprout.com/images/foggygoldengatebridge.jpg'>this</a>.<br><br>"
     html += "<input class='btn btn-success' type='submit' value='Submit'>"
     html += "</form><br><br>"
 
