@@ -126,10 +126,11 @@ htmlStr += """
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
+        <!-- Custom stylesheets -->
+        <link rel="stylesheet" type="text/css" href="../css/login.css">
+
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-        <link rel="stylesheet" type="text/css" href="../css/login.css">
     </head>
 """
 htmlStr += "<body>"

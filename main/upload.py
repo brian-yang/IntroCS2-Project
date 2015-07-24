@@ -270,16 +270,15 @@ htmlStr += "<html><head><title> Upload </title>"
 
 # GETS THE CSS FILES FOR STYLING
 htmlStr += """
-        <!-- Bootstrap stylesheets must come before custom stylesheets! -->
-
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
+        <!-- Custom stylesheets -->
+        <link rel="stylesheet" type="text/css" href="../css/upload.css">
+        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
+
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
-        <link rel="stylesheet" type="text/css" href="../css/navbar.css">
-        <link rel="stylesheet" type="text/css" href="../css/upload.css">
     </head>
 """
 htmlStr += "<body>"
