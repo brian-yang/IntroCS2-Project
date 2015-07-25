@@ -173,12 +173,12 @@ else:
         htmlStr += "<p>Pick what you'd like to do next.</p>"
 
         #build link w querystring (username+"secret"num+IP)
-        #PROFILE LINK
-        htmlStr += '<a class="btn btn-success" href=\"' + "profiles.py"
+        #UPLOAD IMAGES LINK
+        htmlStr += '<a class="btn btn-success" href=\"' + "upload.py"
         htmlStr += "?uname=" + fsd['uname']
         htmlStr += "&usecret=" + secretNum
         htmlStr += "&uip=" + userIP + "\""
-        htmlStr += ">View my Profile</a><br><br>"
+        htmlStr += ">Add Images</a><br><br>"
 
         #build link w querystring (username+"secret"num+IP)
         #CREATE DISPLAY LINK
@@ -189,27 +189,27 @@ else:
         htmlStr += ">Create Display</a><br><br>"
 
         #build link w querystring (username+"secret"num+IP)
-        #UPLOAD IMAGES LINK
-        htmlStr += '<a class="btn btn-success" href=\"' + "upload.py"
-        htmlStr += "?uname=" + fsd['uname']
-        htmlStr += "&usecret=" + secretNum
-        htmlStr += "&uip=" + userIP + "\""
-        htmlStr += ">Add Images</a><br><br>"
-
-        #build link w querystring (username+"secret"num+IP)
         #GALLERY LINK
         htmlStr += '<a class="btn btn-success" href=\"' + "gallery.py"
         htmlStr += "?uname=" + fsd['uname']
         htmlStr += "&usecret=" + secretNum
         htmlStr += "&uip=" + userIP + "\""
-        htmlStr += ">View the Gallery</a><br><br><br>"
+        htmlStr += ">View Gallery</a><br><br>"
+
+        #build link w querystring (username+"secret"num+IP)
+        #PROFILE LINK
+        htmlStr += '<a class="btn btn-success" href=\"' + "profiles.py"
+        htmlStr += "?uname=" + fsd['uname']
+        htmlStr += "&usecret=" + secretNum
+        htmlStr += "&uip=" + userIP + "\""
+        htmlStr += ">My Profile</a><br><br><br>"
 
         #HELP
         htmlStr += "<h4>Confused?</h4>"
-        htmlStr += "<p><b>Profile:</b> You can add an image of yourself and a description so others can know who you are.</p>"
-        htmlStr += "<p><b>Create Display:</b> On this page, choose what images you want to display. Then click display to see them!</p>"
-        htmlStr += "<p><b>Add Images:</b> This is where you can paste your image URLs and save them on our site!</p>"
-        htmlStr += "<p><b>Gallery:</b> View some of the images that others on our site have posted!</p>"
+        htmlStr += "<p><b>Add Images:</b> Save images on our site by providing us with URL links to your images!</p>"
+        htmlStr += "<p><b>Create Display:</b> Select images from the ones you've uploaded to create your very own image exhibition!.</p>"
+        htmlStr += "<p><b>View Gallery:</b> View some of the images that others on our site have uploaded. You may even see some of your images as well!</p>"
+        htmlStr += "<p><b>My Profile:</b> Add an image of yourself and a description so others can know who you are.</p>"
 
         #LOGOUT
         htmlStr += '<a class="btn btn-success" href=\"' + "logout.py"
