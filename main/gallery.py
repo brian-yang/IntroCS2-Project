@@ -219,7 +219,7 @@ else:
 
         #header
         htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron"><h1>Gallery</h1><br>'
-        htmlStr += "<p>View others' images</p></div>"
+        htmlStr += "</div>"
 
         #gallery
         htmlStr += "<div class='gallery-content'>"
