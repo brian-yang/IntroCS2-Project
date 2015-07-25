@@ -329,40 +329,42 @@ else:
 
         htmlStr += """
                     <div class="form-group">
-                        <p class="col-sm-5 control-label">Image URL: </b></p>
+                        <p class="col-sm-5 control-label"><b>Image URL: </b></p>
                         <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='img'> </div>
                     </div> <br>
                     <div class="form-group">
-                        <p class="col-sm-5 control-label">Caption: (optional) </p>
+                        <p class="col-sm-5 control-label"><b>Caption (optional): </b></p>
                         <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='caption'> </div>
                     </div> <br>
                     <div class="form-group">
-                        <p class="col-sm-5 control-label">Tag: </p>
+                        <p class="col-sm-5 control-label"><b>Tag: </b></p>
                         <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='tag'> </div>
                     </div> <br><br>
                     <input class="btn btn-success" type="submit" value="Submit"> <br> <br>
                 </form>
         """
 
-        # instructions
-        htmlStr += """<p>To display your uploaded images, go to the 'create display' page and fill out the form.<br>
-<br>Note: All images categorized under a certain tag will be displayed at the same time
-if you select the tag in the display form. <br>Captions will appear if you hover over images.
-<br>In addition, the Python script verifies if there is an image at the URL with the imghdr Python module.
-<br>Click <a href='https://docs.python.org/2/library/imghdr.html'>here</a> to see all accepted image formats.
-<br>Please make sure that the URL you provide contains only the image, like
-<a href='http://www.quicksprout.com/images/foggygoldengatebridge.jpg'>this</a>.
-</p>
-"""
-
         # writes to CSVs and returns True if successful
         uploadStatus = writeCSV()
         if uploadStatus == "error":
             htmlStr += "<br><p style='color:red'>The URL you provided could not be found. Please try again.</p><br>"
         elif uploadStatus == False:
-            htmlStr += "<br><p style='color:purple'>You either did not fill out all the required forms (image url and tag), or your image could not be recognized. Do that now!</p><br>"
+            htmlStr += "<br><p style='color:purple'>Please fill out all the required forms (image url and tag), and make sure that your URL is valid. (See IMPORTANT!)<br>"
+            htmlStr += "You will see a green success message if everything was inputted correctly.</p><br>"
         elif uploadStatus == True:
             htmlStr += "<br><p style='color:green'>Your input has been saved!<br>You may enter another entry.</p><br>"
+
+        # instructions
+        htmlStr += """<p><b>IMPORTANT!</b>
+<br><b></b> To display your uploaded images, go to the 'create display' page and fill out the form.
+<br><b></b> All images categorized under a certain tag will be displayed at the same time
+if you select the tag in the display form.
+<br><b></b> In addition, the Python script verifies if there is an image at the URL with the imghdr Python module.
+<br>Click <a href='https://docs.python.org/2/library/imghdr.html'>here</a> to see all accepted image formats.
+<br><b></b> Please make sure that the URL you provide contains only the image, like
+<a href='http://www.quicksprout.com/images/foggygoldengatebridge.jpg'>this</a>.
+</p>
+"""
 
 
         htmlStr += "</div>"

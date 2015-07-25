@@ -181,21 +181,23 @@ else:
         htmlStr += "<form type='input' method='GET' action='" + display + "'/>"
 
         #choose a tag to show
-        htmlStr += "From which tags would you like to display content?<br> \
-                    If there are no checkboxes below, you haven't added any entries.<br><br>"
+        htmlStr += "<b>From which tags would you like to display content?<br> \
+                    If there are no checkboxes below, you haven't added any entries.</b><br><br>"
         htmlStr += genTagForm(fsd['uname']) + "<br>"
 
         #show captions?
-        htmlStr += "Do you want to show picture captions?<br>"
-        htmlStr += "If you choose to and not all of your images have captions, you might not have any to see.<br>"
+        htmlStr += "<b>Do you want to show picture captions?<br>"
+        htmlStr += "Captions will appear if you hover over the images regardless, <br>"
+        htmlStr += "but choosing to show caps will make them appear as text.</b><br>"
         htmlStr += "<input type='checkbox' name='showcap'>Show captions<br><br>"
 
         #most used tag
-        htmlStr += "<input type='checkbox' name='freqTag'>Tell me which tag users use most.<br><br>"
+        htmlStr += "<b>Do you want to see the most popular tag?</b><br>"
+        htmlStr += "<input type='checkbox' name='freqTag'>Show most popular tag<br><br>"
 
         #header color
         htmlStr += "<div class='form-group'>"
-        htmlStr += "What color do you fancy today? (Please enter a hexadecimal representation)"
+        htmlStr += "<b>What color do you fancy today? (Please enter a hexadecimal representation)</b>"
         htmlStr += "<input class='form-control col-md-offset-3 color' type='text' name='color'> <br><br>"
         htmlStr += "</div>"
 
