@@ -33,7 +33,7 @@ body {
     width: 33%;
 }
 
-/*FOR SELECT FORM*/
+/*FOR FRIEND SELECT FORM*/
 .dropdown_container {
     display: table;
     margin: 0px auto;
@@ -43,7 +43,7 @@ body {
     width:auto;
 }
 
-/*IE FIX FOR SELECT FORM*/
+/*IE FIX FOR FRIEND SELECT FORM*/
 #dropdown_id {
     width:100%;
 }
