@@ -137,7 +137,7 @@ def getGallery():
     for i in range(len(imgL)):
         randNum = random.randrange(len(imgL))
         s += "<img src='" + imgL[randNum].replace("~~",",") + \
-        "' alt='" + capL[randNum].replace("~~",",") + "'/><br>\n"
+        "' alt='" + capL[randNum].replace("~~",",") + "'/>\n"
 
     return s
 
@@ -149,15 +149,40 @@ def getGallery():
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
 htmlStr += "<html><head><title>Gallery</title>"
 htmlStr += """
-        <!-- Latest compiled and minified CSS -->
+        <!-- Latest compiled and minified Bootstrap CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
+
+        <!-- Required Owl Carousel stylesheet -->
+        <link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
+
+        <!-- Default Owl Carousel theme -->
+        <link rel="stylesheet" href="../owl-carousel/owl.theme.css">
 
         <!-- Custom stylesheets -->
         <link rel="stylesheet" type="text/css" href="../css/gallery.css">
         <link rel="stylesheet" type="text/css" href="../css/navbar.css">
 
-        <!-- Latest compiled and minified JavaScript -->
+        <!-- jQuery plugin v1.11.3 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <!-- Latest compiled and minified Bootstrap JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <!-- Owl Carousel minified JavaScript -->
+        <script src="../owl-carousel/owl.carousel.min.js"></script>
+
+        <!-- Owl Carousel initializer (calls js plugin) -->
+        <script>
+            $(document).ready(function() {
+                $('.owl-carousel').owlCarousel({
+                    autoPlay: 3000,
+                    navigation: true,
+                    slideSpeed: 300,
+                    paginationSpeed: 400,
+                    singleItem: true
+                });
+            });
+        </script>
     </head>
 """
 htmlStr += "<body>"
@@ -198,7 +223,9 @@ else:
 
         #gallery
         htmlStr += "<div class='gallery-content'>"
+        htmlStr += "<div class='owl-carousel'>"
         htmlStr += getGallery()
+        htmlStr += "</div>"
         htmlStr += "</div>"
     else:
         #if user not logged in
