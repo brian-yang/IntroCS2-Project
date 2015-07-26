@@ -1,0 +1,13 @@
+# Set the default behavior, in case other users have core.autocrlf set to false.
+* text=auto
+
+# Declare files that will be normalized (converted to LF line endings on pushing to the GitHub repo).
+*.py text
+*.css text
+*.js text
+*.html text
+*.csv text
+
+
+# Denote all files that are not affected by line endings and should not be modfied.
+*.jpg binary
