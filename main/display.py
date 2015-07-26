@@ -299,7 +299,7 @@ def formatTime(timeStr):
 # ======= Must be beginning of HTML string ========
 
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
-htmlStr += "<html><head><title>" + fsd['uname'] + "'s Display </title>"
+htmlStr += "<html><head><title>Display</title>"
 htmlStr += """
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
