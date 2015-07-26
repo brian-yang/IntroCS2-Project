@@ -138,7 +138,7 @@ htmlStr += "<body>"
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 if not valid():
-    htmlStr += "invalid input"
+    htmlStr += "Invalid input"
 else:
     validated = authenticate( fsd['uname'], fsd['upass'] )
     ################################

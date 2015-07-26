@@ -382,7 +382,7 @@ def tagify(tag,s):
 
 
 if not valid():
-    htmlStr += "session string problem?"
+    htmlStr += "Session string problem?"
 else:
     validated = authSession()
     if validated:

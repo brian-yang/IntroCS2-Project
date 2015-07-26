@@ -118,7 +118,8 @@ htmlStr += "<body style='text-align:center;'>"
 #htmlStr += str( fsd )
 #htmlStr += str( userExists(fsd[uname]) )
 if not valid():
-    htmlStr += "<h3>invalid input</h3>"
+    htmlStr += "<br><h3>Account creation failed. Click back to try again.</h3>"
+    htmlStr += "<br><p>You either did not fill out everything or perhaps your passwords didn't match.</p>"
 else:
     if createUser( fsd['uname'], fsd['upass1'] ):
         htmlStr += "<h3>Account created.</h3>"
@@ -126,8 +127,7 @@ else:
         htmlStr += "Log In</a>"
     else:
         htmlStr += "<br><h3>Account creation failed. Click back to try again.</h3>"
-        htmlStr += "<br><p>Your username may have been registered already<br> \
-                    or maybe your passwords don't match.</p>"
+        htmlStr += "<br><p>Your username may have been taken.</p>"
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

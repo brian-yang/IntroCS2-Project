@@ -112,7 +112,7 @@ htmlStr += "<body style='text-align:center;'>"
 
 # ~~~~~~~~~~~~~ HTML-generating code ~~~~~~~~~~~~~~
 if not valid():
-    htmlStr += "session string problem?"
+    htmlStr += "Session string problem?"
 else:
     validated = authSession()
     #~~~~~~~~~~~~~~~~~~~ diag HTML... ~~~~~~~~~~~~~
