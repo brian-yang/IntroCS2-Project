@@ -1,0 +1,5 @@
+# Data storage files
+*.csv
+
+# .csv files should be included when checking out (e.g. git clone) from the repo
+# but should not be included when checking in
