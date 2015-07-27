@@ -5,6 +5,11 @@ html, body {
     text-align:center;
 }
 
+body {
+    background:url("../main/bg-imgs/gallery.jpg"); /*looks for images from the viewpoint of the css file*/
+    background-size:cover;
+}
+
 .wrap {
     min-height: 100%;
     height: auto;
@@ -12,6 +17,14 @@ html, body {
     margin: 0 auto -190px;
     /* Pad bottom by footer height */
     padding: 0 0 190px;
+}
+
+.jumbotron {
+    background:black;
+    font-family:Verdana;
+    font-weight:bold;
+    color:white;
+    margin-bottom: 0px;
 }
 
 /*--------------------------------------------
@@ -24,8 +37,13 @@ html, body {
     width:60%;
 }
 
+.home-container {
+    font-family:"Courier New", Courier, monospace;
+    font-weight:bold;
+    font-size:1.2em;
+}
 
-.col1, .col2 {
+.login, .register {
     background-color:#81DAF5;
     height:240px;
     padding-top:3%;
@@ -33,14 +51,7 @@ html, body {
     border-radius: 6px 6px 6px 6px;
 }
 
-.col-md-6 {
-    font-family:"Courier New", Courier, monospace;
-    font-weight:bold;
-    font-size:1.2em;
-}
-
-
-.col-md-12 {
+.footer {
     height: 190px;
     border-color:#848484;
     background-color:black;

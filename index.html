@@ -4,32 +4,33 @@
     <head>
 
         <title> Picsy </title>
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-
         <!-- BOOTSTRAP -->
         <!-- Latest compiled and minified CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
         <!-- Latest compiled and minified JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-        
+
+        <!-- Custom stylesheet -->
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
     </head>
 
-    <body style='background:url("main/bg-imgs/gallery.jpg"); background-size:cover;'>
+    <body>
 
       <div class="wrap">
 
-        <div style="background:black; font-family:'Verdana'; font-weight:bold; color:white; !important" class="jumbotron">
+        <div class="jumbotron">
             <h1>Picsy</h1>
             <p>Code-22</p>
         </div>
 
         <div class="columns">
 
-            <div class="col-md-6">
-                <div class="col1">
+            <div class="col-md-6 home-container">
+                <div class="login">
                 <p>LOGIN</p>
 
                 <form type="input" method="POST" action="main/login.py" class="form-horizontal">
@@ -51,8 +52,8 @@
                 </div>
             </div>
 
-            <div class="col-md-6">
-                <div class="col2">
+            <div class="col-md-6 home-container">
+                <div class="register">
                 <p>SIGNUP</p>
 
                 <form type="input" method="POST" action="main/register.py" class="form-horizontal">
@@ -84,7 +85,7 @@
 
       </div>
 
-      <div class="col-md-12">
+      <div class="col-md-12 footer">
           <h3>About</h3>
           <p>Upload picture URLs and tag them to set up a gallery of your favorite images.</p>
           <p>See other users' galleries in the public gallery.</p>
