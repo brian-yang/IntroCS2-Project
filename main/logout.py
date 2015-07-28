@@ -130,7 +130,7 @@ else:
             htmlStr += "Log In</a>"
     else:
         htmlStr += "<br><h3>You weren't logged in.</h3>"
-        htmlStr += '<a href="'+ loginPage + '">'
+        htmlStr += '<a class="btn btn-success" href="'+ loginPage + '">'
         htmlStr += "Log In</a>"
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
