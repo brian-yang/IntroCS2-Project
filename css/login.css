@@ -7,7 +7,7 @@ body {
 .wrap {
     background-color: white;
     margin: 10% 30%;
-    padding-top: 1%;
+    padding: 1% 1% 0%;
     border: groove orange;
     border-radius: 10%;
 }
