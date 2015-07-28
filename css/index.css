@@ -30,7 +30,8 @@ body {
 /*columns*/
 
 .columns {
-    margin:7% auto;
+    position: absolute;
+    margin:9% 10%;
     width:80%;
 }
 
