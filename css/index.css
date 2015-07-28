@@ -13,10 +13,6 @@ body {
 .wrap {
     min-height: 100%;
     height: auto;
-    /* Negative indent footer by its height */
-    margin: 0 auto -190px;
-    /* Pad bottom by footer height */
-    padding: 0 0 190px;
 }
 
 .jumbotron {
@@ -24,7 +20,8 @@ body {
     font-family:Verdana;
     font-weight:bold;
     color:white;
-    margin-bottom: 0px;
+    margin-bottom:0px;
+    padding: 10px 0px;
 }
 
 /*--------------------------------------------
@@ -34,7 +31,7 @@ body {
 
 .columns {
     margin:7% auto;
-    width:60%;
+    width:80%;
 }
 
 .home-container {
@@ -46,15 +43,20 @@ body {
 .login, .register {
     background-color:#81DAF5;
     height:240px;
-    padding-top:3%;
-    padding-left:3%;
+    padding-left:1%;
     border-radius: 6px 6px 6px 6px;
 }
 
-.footer {
-    height: 190px;
+.login {
+    padding-top: 5%;
+}
+
+.register{
+    padding-top: 2%;
+}
+
+#footer {
     border-color:#848484;
     background-color:black;
     color:#D8D8D8;
-    padding-top: 1%;
 }
