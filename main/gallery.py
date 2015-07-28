@@ -220,7 +220,7 @@ else:
         """
 
         #header
-        htmlStr += '<div style="background:black; font-family:\'Verdana\'; font-weight:bold; color:white; !important" class="jumbotron"><h1>Gallery</h1>'
+        htmlStr += '<div class="jumbotron"><h1>Gallery</h1>'
         htmlStr += "</div>"
 
         #gallery

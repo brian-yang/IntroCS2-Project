@@ -355,9 +355,8 @@ else:
         """
 
         #header
-        htmlStr += '<div style="background:' + bgcolor + '; '
-        htmlStr += 'font-family:\'Verdana\'; font-weight:bold; ' + 'color:' + text + '; '
-        htmlStr += '!important" class="jumbotron" >'
+        htmlStr += '<div style="background:' + bgcolor + ';" '
+        htmlStr += 'class="jumbotron" >'
         htmlStr += '<h1>' + fsd['uname'] + "'s Display</h1></div>"
 
         #blue background div
