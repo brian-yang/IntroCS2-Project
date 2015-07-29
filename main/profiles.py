@@ -286,8 +286,10 @@ def writeDescription(description):
 def profDescription():
     html = "<form name='desc' type='input' method='GET' action='profiles.py'>"
     html += "<div class='form-group'>"
-    html += "<br><label for='description'>Update your description.</label><br>"
-    html += "<textarea class='form-control col-md-offset-3 textarea' rows='5' name='description' placeholder='I am awesome!'></textarea><br>"
+    html += "<div class='textarea-container'>"
+    html += "<br>Update your description.<br>"
+    html += "<textarea class='form-control textarea-class' rows='5' name='description' placeholder='I am awesome!'></textarea><br>"
+    html += "</div>"
     html += sessionForm()
     html += "<input class='btn btn-success' type='submit' value='Submit'>"
     html += "</div>"
@@ -296,9 +298,13 @@ def profDescription():
     return html
 
 def profImg():
-    html = "<br><br>Change your profile picture by adding a URL!<br>"
-    html += "<form name='profimg' type='input' method='GET' action='profiles.py'>"
-    html += "<input class='form-control col-md-offset-4 prof-img' type='text' name='profilePic'><br>"
+    html = "<form name='profimg' type='input' method='GET' action='profiles.py'>"
+    html += "<div class='form-group'>"
+    html += "<div class='prof-img-container'>"
+    html += "<br><br>Change your profile picture by adding a URL!<br>"
+    html += "<input class='form-control prof-img-class' type='text' name='profilePic'><br>"
+    html += "</div>"
+    html += "</div>"
     html += sessionForm()
     html += "If your profile picture does not change, you may have entered in an invalid URL. <br>See "
     html += "<a style='color:#FF8C00;' href='https://docs.python.org/2/library/imghdr.html'>here</a>"

@@ -21,6 +21,11 @@ body {
     min-height: 100%;
 }
 
-.color {
-    width: 50%;
+.color-container {
+    display: table;
+    margin: 0px auto;
+}
+
+.color-class{
+    width: 100%;
 }

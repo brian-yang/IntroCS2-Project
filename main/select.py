@@ -199,8 +199,10 @@ else:
 
         #header color
         htmlStr += "<div class='form-group'>"
+        htmlStr += "<div class='color-container'>"
         htmlStr += "<b>What color do you fancy today? (Please enter a hexadecimal representation)</b>"
-        htmlStr += "<input class='form-control col-md-offset-3 color' type='text' name='color'> <br><br>"
+        htmlStr += "<input class='form-control color-class' type='text' name='color'> <br><br>"
+        htmlStr += "</div>"
         htmlStr += "</div>"
 
         #submit button

@@ -30,8 +30,13 @@ body {
 }
 
 /*FOR IMG FORM*/
-.prof-img {
-    width: 33%;
+.prof-img-container {
+    display: table;
+    margin: 0px auto;
+}
+
+.prof-img-class {
+    width: 100%;
 }
 
 /*FOR FRIEND SELECT FORM*/
@@ -54,6 +59,11 @@ body {
 }
 
 /*FOR TEXTAREA FORM*/
-.textarea {
-    width: 50%;
+.textarea-container{
+    display: table;
+    margin: 0px auto;
+}
+
+.textarea-class {
+    width: 100%;
 }
