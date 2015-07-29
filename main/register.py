@@ -95,7 +95,7 @@ def createUser(u,p):
         tags.close()
 
         profiles = open('../site_data/userProfiles.csv', 'a')
-        profiles.write(u + ",I am awesome!,profpics/new-user.jpg" + "\n")
+        profiles.write(u + ",I am awesome!,profile-imgs/new-user.jpg" + "\n")
         profiles.close()
 
         return True

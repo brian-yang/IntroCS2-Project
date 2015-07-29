@@ -6,7 +6,7 @@ html, body {
 }
 
 body {
-    background:url("../main/bg-imgs/gallery.jpg"); /*looks for images from the viewpoint of the css file*/
+    background:url("../main/background-imgs/gallery.jpg"); /*looks for images from the viewpoint of the css file*/
     background-size:cover;
 }
 

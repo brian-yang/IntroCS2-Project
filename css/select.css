@@ -1,6 +1,6 @@
 body {
     text-align:center;
-    background:url("../main/bg-imgs/art.jpg"); /*looks for images from the viewpoint of the css file*/
+    background:url("../main/background-imgs/art.jpg"); /*looks for images from the viewpoint of the css file*/
     background-size:cover;
 }
 
