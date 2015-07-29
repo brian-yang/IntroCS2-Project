@@ -44,7 +44,9 @@ def valid():
 
 #makes sure only alphanumeric input was used
 def alphanumeric(username):
-    allowed = "abcdefghijklmnopqrstuvwxyz1234567890"
+    allowed = "abcdefghijklmnopqrstuvwxyz"
+    allowed += "abcdefghijklmnopqrstuvwxyz".upper()
+    allowed += "1234567890"
     for i in username:
         if i not in allowed:
             return False
@@ -75,28 +77,30 @@ def writeWidgetsCSV(csv, user):
 def createUser(u,p):
     if userExists(u) or not alphanumeric(u):
         return False
-    f = open(userfile,'a')
-    f.write(u + "," + hashlib.md5(p).hexdigest() + "\n")
-    f.close()
+    try:
+        f = open(userfile,'a')
+        f.write(u + "," + hashlib.md5(p).hexdigest() + "\n")
+        f.close()
 
-    caps = open('../site_data/userCaps.csv', 'a')
-    caps.write(u + "\n")
-    caps.close()
+        caps = open('../site_data/userCaps.csv', 'a')
+        caps.write(u + "\n")
+        caps.close()
 
-    imgs = open('../site_data/userImgs.csv', 'a')
-    imgs.write(u + "\n")
-    imgs.close()
+        imgs = open('../site_data/userImgs.csv', 'a')
+        imgs.write(u + "\n")
+        imgs.close()
 
-    tags = open('../site_data/userTags.csv', 'a')
-    tags.write(u + "\n")
-    tags.close()
+        tags = open('../site_data/userTags.csv', 'a')
+        tags.write(u + "\n")
+        tags.close()
 
-    profiles = open('../site_data/userProfiles.csv', 'a')
-    profiles.write(u + ",I am awesome!,profpics/new-user.jpg" + "\n")
-    profiles.close()
+        profiles = open('../site_data/userProfiles.csv', 'a')
+        profiles.write(u + ",I am awesome!,profpics/new-user.jpg" + "\n")
+        profiles.close()
 
-    return True
-
+        return True
+    except:
+        return False
 
 # ========= CONTENT-TYPE LINE REQUIRED. ===========
 # ======= Must be beginning of HTML string ========
