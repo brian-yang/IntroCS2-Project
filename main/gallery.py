@@ -135,9 +135,8 @@ def getGallery():
     s = ""
 
     for i in range(len(imgL)):
-        randNum = random.randrange(len(imgL))
-        s += "<img src='" + imgL[randNum].replace("~~",",") + \
-        "' alt='" + capL[randNum].replace("~~",",") + "'/>\n"
+        s += "<img src='" + imgL[i].replace("~~",",") + \
+        "' alt='" + capL[i].replace("~~",",") + "'/>\n"
 
     return s
 
