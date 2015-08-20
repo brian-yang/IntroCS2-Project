@@ -3,6 +3,7 @@ body {
     background:url("../src/background-imgs/art.jpg"); /*looks for images from the viewpoint of the css file*/
     background-size:cover;
     background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 .jumbotron {
@@ -21,4 +22,24 @@ body {
     background: url("http://www.backgroundvector.com/wordpress/wp-content/uploads/2012/03/Abstract-Wave-Blue-Background-Vector.jpg");
     background-size: cover;
     font-size: 150%;
+}
+
+
+/*--------------------------------*/
+
+@media (max-width: 767px) {
+
+    .form-control {
+	width: 50%;
+        margin: 0 auto;
+    }
+
+}
+
+@media (min-width: 768px) {
+
+    .form-control {
+	width: 110%;
+    }
+
 }

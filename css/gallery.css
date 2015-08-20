@@ -3,6 +3,7 @@ body {
     background:url("../src/background-imgs/art.jpg"); /*looks for images from the viewpoint of the css file*/
     background-size:cover;
     background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 .jumbotron {
@@ -30,6 +31,7 @@ img {
     height: 100%;
 }
 
+/*owl-carousel styling*/
 .owl-carousel {
     position: relative;
 }
@@ -39,9 +41,21 @@ img {
     top: 50%;
     margin-top: -10px; // Half of the prev/next buttons height here in negatives to center them perfectly
 }
+
 .owl-prev {
     left: 0;
 }
+
 .owl-next {
     right: 0;
 }
+
+
+/*-------------------------------------*/
+
+@media (max-width: 767px) {
+    .gallery-content {
+	margin: 0;
+    }
+}
+

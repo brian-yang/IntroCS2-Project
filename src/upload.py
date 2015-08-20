@@ -332,15 +332,15 @@ else:
         htmlStr += """
                     <div class="form-group">
                         <p class="col-sm-5 control-label"><b>Image URL: </b></p>
-                        <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='img'> </div>
+                        <div class="col-sm-2"> <input class="form-control" type="text" name='img'> </div>
                     </div> <br>
                     <div class="form-group">
                         <p class="col-sm-5 control-label"><b>Caption (optional): </b></p>
-                        <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='caption'> </div>
+                        <div class="col-sm-2"> <input class="form-control" type="text" name='caption'> </div>
                     </div> <br>
                     <div class="form-group">
                         <p class="col-sm-5 control-label"><b>Tag: </b></p>
-                        <div class="col-sm-2"> <input class="form-control" type="text" style="width:110%;" name='tag'> </div>
+                        <div class="col-sm-2"> <input class="form-control" type="text" name='tag'> </div>
                     </div> <br><br>
                     <input class="btn btn-success" type="submit" value="Submit"> <br>
                 </form>

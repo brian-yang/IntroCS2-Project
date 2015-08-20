@@ -9,6 +9,7 @@ body {
     background:url("../src/background-imgs/gallery.jpg"); /*looks for images from the viewpoint of the css file*/
     background-size:cover;
     background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 .wrap {
@@ -65,4 +66,54 @@ body {
     border-color:#848484;
     background-color:black;
     color:#D8D8D8;
+}
+
+/*--------------------------------------------
+
+/*media queries*/
+
+
+/*max width*/
+@media (max-width: 991px) {
+
+    #footer {
+        display: none;
+    }
+
+    .register {
+	margin-top: 10%;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .login {
+	padding-top: 5%;
+    }
+
+    .form-control {
+	width: 60%;
+	margin-left:1%;
+    }
+
+    .control-label {
+        float: left;
+	margin-left: 3%;
+    }
+}
+
+@media (max-width: 400px) {
+
+    .control-label {
+        padding-right: 1px;
+    }
+}
+
+/*min width*/
+@media (min-width: 768px) {
+
+    .form-control {
+	width: 75%;
+    }
 }

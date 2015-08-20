@@ -3,6 +3,7 @@ body {
     background:url("../src/background-imgs/art.jpg"); /*looks for images from the viewpoint of the css file*/
     background-size:cover;
     background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 .jumbotron {

@@ -3,6 +3,7 @@ body {
     background:url(http://miriadna.com/desctopwalls/images/max/Walking-path.jpg); /*looks for images from the viewpoint of the css file*/
     background-size:cover;
     background-attachment: fixed;
+    background-repeat: no-repeat;
 }
 
 .wrap {
@@ -11,4 +12,22 @@ body {
     padding: 1% 1% 0%;
     border: groove orange;
     border-radius: 10%;
+}
+
+/*----------------------------------*/
+
+@media (max-width: 767px) {
+
+    .wrap {
+	margin: 10% 25%;
+    }
+
+}
+
+@media (max-width: 500px) {
+
+    .wrap {
+	margin: 10% 15%;
+    }
+
 }
