@@ -7,3 +7,9 @@ Made by Code-22:
 
 - Brian Yang
 - Jannie Li
+
+![Home](https://github.com/brian-yang/picsy/blob/master/preview/home.jpg)
+
+![Sitemap](https://github.com/brian-yang/picsy/blob/master/preview/sitemap.jpg)
+
+![Gallery](https://github.com/brian-yang/picsy/blob/master/preview/gallery.jpg)
