@@ -13,6 +13,9 @@ import sys
 sys.path.insert(0, '../cgiToDict/')
 import cgiDeal
 
+import random
+
+
 
 # ~~~~~~~~~~~~~~~ auxiliary files ~~~~~~~~~~~~~~~~~
 #file to store users and their passwords:
@@ -24,8 +27,7 @@ currentUsersFile="../site_data/usersOnline.csv"
 #pages to navigate to:
 upload="upload.py"
 profile="profiles.py"
-gallery="gallery.py"
-display="display.py"
+select="select.py"
 
 #login page:
 loginPage="../index.html"
@@ -87,34 +89,59 @@ def sessionLinkify(dst,visText):
     retStr += "</a>"
     return retStr
 
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#=============== FORM GENERATION ===================
+def galleryList(lines, L):
 
-#generate the html for an option in a select form with a given value and text
-def checkGen(name,value,text):
-    return '<input type="checkbox" name="' + name + '" value="' + value.replace("~~", ",") + '">' + text.replace("~~", ",") + "<br>"
+    # removes newlines
+    pos = 0
+    while pos < len(lines):
+        lines[pos] = lines[pos][:-1]
+        pos += 1
 
+    # gets the images for each user
+    for line in lines:
+        if line.find(",") != -1:
+            L.extend(line.split(",")[1:])
+    return L
 
-#generates a series of <option>s for the tag form
-#includes all the different tags a user has, with no repeats
-def genTagForm(username):
-    file = open('../site_data/userTags.csv','r')
-    read = file.readlines()
+def getGallery():
+    file = open('../site_data/userImgs.csv', 'r')
+    imgs = file.readlines()
     file.close()
 
-    html = "" #store form html
+    imgL = []
 
-    for i in read:
-        if i.split(',')[0] == username or i.split(",")[0] == username + "\n":
-            tags = (i[:-1].split(","))[1:]
-            usedTags = []
-            pos = 1
-            for eachTag in tags:
-                if eachTag not in usedTags:
-                    html += checkGen(str(pos),eachTag,eachTag)
-                    usedTags.append(eachTag)
-                    pos += 1
-    return html
+    imgL = galleryList(imgs, imgL)
+
+    if imgL == []:
+        return "Nothing to show today. Try again when you or others have uploaded pics."
+    # --------------------------------------
+
+    file = open('../site_data/userCaps.csv', 'r')
+    caps = file.readlines()
+    file.close()
+
+    capL = []
+
+    capL = galleryList(caps, capL)
+
+    if capL == []:
+        return "Nothing to show today. Try again when you or others have uploaded pics."
+    # --------------------------------------
+    # imgL is the list of img URLS
+    # capL is the list of captions
+
+    s = ""
+    imageInd = 0
+
+    for i in range(5):
+	imageInd = random.randrange(len(imgL)) 
+        s += "<img src='" + imgL[imageInd].replace("~~",",") + \
+        "' alt='" + capL[imageInd].replace("~~",",") + "'/>\n"
+	del imgL[imageInd]
+
+    return s
 
 
 
@@ -122,17 +149,42 @@ def genTagForm(username):
 # ======= Must be beginning of HTML string ========
 
 htmlStr = "Content-Type: text/html\n\n" #NOTE there are 2 '\n's !!!
-htmlStr += "<html><head><title> Create Display </title>"
+htmlStr += "<html><head><title>Gallery</title>"
 htmlStr += """
-        <!-- Latest compiled and minified CSS -->
+        <!-- Latest compiled and minified Bootstrap CSS -->
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css">
 
+        <!-- Required Owl Carousel stylesheet -->
+        <link rel="stylesheet" href="../owl-carousel/owl.carousel.css">
+
+        <!-- Default Owl Carousel theme -->
+        <link rel="stylesheet" href="../owl-carousel/owl.theme.css">
+
         <!-- Custom stylesheets -->
-        <link rel="stylesheet" type="text/css" href="../css/select.css">
+        <link rel="stylesheet" type="text/css" href="../css/gallery.css">
         <link rel="stylesheet" type="text/css" href="../css/navbar.css">
 
-        <!-- Latest compiled and minified JavaScript -->
+        <!-- jQuery plugin v1.11.3 -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
+        <!-- Latest compiled and minified Bootstrap JavaScript -->
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+
+        <!-- Owl Carousel minified JavaScript -->
+        <script src="../owl-carousel/owl.carousel.min.js"></script>
+
+        <!-- Owl Carousel initializer (calls js plugin) -->
+        <script>
+            $(document).ready(function() {
+                $('.owl-carousel').owlCarousel({
+                    autoPlay: 3000,
+                    navigation: true,
+                    slideSpeed: 300,
+                    paginationSpeed: 400,
+                    singleItem: true
+                });
+            });
+        </script>
 
         <meta name="viewport" content="width=device-width, initial-scale=1">
     </head>
@@ -146,11 +198,6 @@ if not valid():
 else:
     validated = authSession()
     if validated:
-
-        #session
-        session = "<input type='hidden' name='uname' value='" + fsd['uname'] + "' readonly='readonly'>"
-        session += "<input type='hidden' name='usecret' value='" + fsd['usecret'] + "' readonly='readonly'>"
-        session += "<input type='hidden' name='uip' value='" + fsd['uip'] + "' readonly='readonly'>"
 
         # links to other pages
         htmlStr += """
@@ -175,42 +222,15 @@ else:
         """
 
         #header
-        htmlStr += '<div class="jumbotron">'
-        htmlStr += "<h1> Create Display </h1></div>"
-
-        #form
-        htmlStr += "<div class='select-form'>"
-        htmlStr += "<form type='input' method='GET' action='" + display + "'/>"
-
-        #choose a tag to show
-        htmlStr += "<b>From which tags would you like to display content?<br> \
-                    If there are no checkboxes below, you haven't added any entries.</b><br><br>"
-        htmlStr += genTagForm(fsd['uname']) + "<br>"
-
-        #show captions?
-        htmlStr += "<b>Do you want to show picture captions?<br>"
-        htmlStr += "Captions will appear if you hover over the images regardless, <br>"
-        htmlStr += "but choosing to show caps will make them appear as text.</b><br>"
-        htmlStr += "<input type='checkbox' name='showcap'>Show captions<br><br>"
-
-        #most used tag
-        htmlStr += "<b>Do you want to see the most popular tag?</b><br>"
-        htmlStr += "<input type='checkbox' name='freqTag'>Show most popular tag<br><br>"
-
-        #header color
-        htmlStr += "<div class='form-group'>"
-        htmlStr += "<div class='color-container'>"
-        htmlStr += "<b>What color do you fancy today? (Please enter a hexadecimal representation)</b>"
-        htmlStr += "<input class='form-control color-class' type='text' name='color'> <br><br>"
-        htmlStr += "</div>"
+        htmlStr += '<div class="jumbotron"><h1>Gallery</h1>'
         htmlStr += "</div>"
 
-        #submit button
-        htmlStr += session
-        htmlStr += '<input class="btn btn-success" type="submit" value="Display"><br><br>'
-        htmlStr += "</form>"
+        #gallery
+        htmlStr += "<div class='gallery-content'>"
+        htmlStr += "<div class='owl-carousel'>"
+        htmlStr += getGallery()
         htmlStr += "</div>"
-
+        htmlStr += "</div>"
     else:
         #if user not logged in
         htmlStr += "<br>Logged in you are not. Click "

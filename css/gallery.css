@@ -1,7 +1,8 @@
 body {
     text-align:center;
-    background:url("../main/background-imgs/art.jpg"); /*looks for images from the viewpoint of the css file*/
+    background:url("../src/background-imgs/art.jpg"); /*looks for images from the viewpoint of the css file*/
     background-size:cover;
+    background-attachment: fixed;
 }
 
 .jumbotron {
@@ -16,8 +17,8 @@ body {
 
 .gallery-content {
     margin: 0% 10%;
-    padding: 5% 0%;
-    background-color:#6495ED;
+    background: url("http://www.backgroundvector.com/wordpress/wp-content/uploads/2012/03/Abstract-Wave-Blue-Background-Vector.jpg");
+    background-size: cover;
     font-size: 150%;
     font-weight: bold;
     min-height: 100%;
@@ -26,5 +27,21 @@ body {
 img {
     display: block;
     width: 100%;
-    height: 80%;
+    height: 100%;
+}
+
+.owl-carousel {
+    position: relative;
+}
+
+.owl-prev, .owl-next {
+    position: absolute;
+    top: 50%;
+    margin-top: -10px; // Half of the prev/next buttons height here in negatives to center them perfectly
+}
+.owl-prev {
+    left: 0;
+}
+.owl-next {
+    right: 0;
 }
