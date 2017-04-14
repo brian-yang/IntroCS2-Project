@@ -1,4 +1,4 @@
-IntroCS2 Final Project
+picsy
 ======================
 
 This is my IntroCS2 final project, picsy, an online gallery created by and for users. See other users' profiles and upload pictures to the gallery.
